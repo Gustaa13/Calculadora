@@ -18,7 +18,13 @@ public class App extends Application {
     @SuppressWarnings("exports")
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("calculadora-padrao"), 400, 550);
+        
+        scene.getStylesheets().add(getClass().getResource("/com/github/gustaa13/style.css").toExternalForm());
+
+        stage.setResizable(false);
+
+        stage.setTitle("Calculadora");
         stage.setScene(scene);
         stage.show();
     }

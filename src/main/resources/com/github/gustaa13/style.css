@@ -1,0 +1,14 @@
+.text-field {
+    -fx-text-fill: rgb(85, 85, 85);
+}
+
+.button:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.text-field:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
