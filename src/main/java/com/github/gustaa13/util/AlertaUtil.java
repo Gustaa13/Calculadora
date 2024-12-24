@@ -11,11 +11,13 @@ public class AlertaUtil {
     private AlertType tipo;
     private String titulo;
     private String mensagem;
+    private Double segundos;
 
-    public AlertaUtil(AlertType tipo, String titulo, String mensagem) {
+    public AlertaUtil(AlertType tipo, String titulo, String mensagem, Double segundos) {
         this.tipo = tipo;
         this.titulo = titulo;
         this.mensagem = mensagem;
+        this.segundos = segundos;
     }
 
     public void janelaDeAlerta(){
@@ -27,7 +29,7 @@ public class AlertaUtil {
 
         alerta.show();
 
-        PauseTransition pausa = new PauseTransition(Duration.seconds(1.5)); 
+        PauseTransition pausa = new PauseTransition(Duration.seconds(segundos)); 
         pausa.setOnFinished(event -> {
             Platform.runLater(() -> alerta.close());
         });

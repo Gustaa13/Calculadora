@@ -88,10 +88,44 @@ public class CalculadoraPadraoControlador {
 
     }
 
+    private int indexDoUltimoNumero(){
+        int index;
+
+        if(permitirVirgula){
+            index = expressao.length() - 1 - contadorDeAlgarismos;
+        }else{
+            index = expressao.length() - 2 - contadorDeAlgarismos;
+        }
+
+        return index;
+    }
+
+    private boolean numeroAnteriorIgualaZero(){
+        String ultimoNumero = expressao.substring(Math.max(0, indexDoUltimoNumero()));
+        
+        if(!ultimoNumero.matches(".*[1-9].*")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private boolean erroDivisaoPorZero(){
+        if(numeroAnteriorIgualaZero() && expressao.charAt(indexDoUltimoNumero()) == '÷'){
+            AlertaUtil erroDivisaoPorZero = new AlertaUtil(AlertType.ERROR, "Erro de Divisão por Zero", "Não é possível dividir por zero.", 2.0);
+
+            erroDivisaoPorZero.janelaDeAlerta();
+
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public void adicionarTexto(String caracter){
 
         if(expressao.length() >= 100){
-            AlertaUtil alertaDeCaracteres = new AlertaUtil(AlertType.INFORMATION, "Alerta de caraceteres", "Não é possível inserir mais de 100 caracteres.");
+            AlertaUtil alertaDeCaracteres = new AlertaUtil(AlertType.INFORMATION, "Alerta de caraceteres", "Não é possível inserir mais de 100 caracteres.", 1.5);
 
             alertaDeCaracteres.janelaDeAlerta();
             return;
@@ -99,7 +133,7 @@ public class CalculadoraPadraoControlador {
 
         if(caracter.matches("[0-9]")){ 
             if(contadorDeAlgarismos >= 15){
-                AlertaUtil alertaDeAlgarismos = new AlertaUtil(AlertType.INFORMATION, "Alerta de dígitos", "Não é possível inserir mais de 15 dígitos.");
+                AlertaUtil alertaDeAlgarismos = new AlertaUtil(AlertType.INFORMATION, "Alerta de dígitos", "Não é possível inserir mais de 15 dígitos.", 1.5);
     
                 alertaDeAlgarismos.janelaDeAlerta();
             }else{
@@ -108,13 +142,17 @@ public class CalculadoraPadraoControlador {
             }
         }
         else if(caracter.equals(",")){
-            if(podeAdicionarCaracter() && !expressao.toString().endsWith(",") && permitirVirgula){
+            if(permitirVirgula && contadorDeAlgarismos == 0){
+                expressao.append("0,");
+                permitirVirgula = false; 
+                contadorDeAlgarismos ++;
+            }else if(permitirVirgula){
                 expressao.append(caracter);
                 permitirVirgula = false; 
             }
         }
         else if(caracter.matches("[+\\-x÷]")){ 
-            if(podeAdicionarCaracter()){
+            if(podeAdicionarCaracter() && !erroDivisaoPorZero()){    
                 expressao.append(caracter);
                 permitirVirgula = true; 
                 contadorDeAlgarismos = 0;
@@ -221,6 +259,9 @@ public class CalculadoraPadraoControlador {
 
     @FXML
     private void pressionarIgual(){
+
+        if(erroDivisaoPorZero()) return;
+
         InterpretadorCalculadora interpretador = new InterpretadorCalculadora(expressao.toString());
         interpretador.calcularResultadoTotal();
 
@@ -235,6 +276,11 @@ public class CalculadoraPadraoControlador {
     @FXML
     private void pressionarVirgula(){
         adicionarTexto(virgula.getText());
+    }
+
+    @FXML
+    private void pressionarPorcentagem(){
+        adicionarTexto(porcentagem.getText());
     }
 
     @FXML
@@ -280,26 +326,43 @@ public class CalculadoraPadraoControlador {
             adicionarEventoAoPressionarTecla(nove, KeyCode.NUMPAD9);
 
             adicionarEventoAoPressionarTecla(soma, KeyCode.ADD);
+            adicionarEventoAoPressionarTecla(soma, KeyCode.EQUALS, true);
 
             adicionarEventoAoPressionarTecla(subtracao, KeyCode.SUBTRACT);
+            adicionarEventoAoPressionarTecla(subtracao, KeyCode.MINUS);
 
             adicionarEventoAoPressionarTecla(multiplicacao, KeyCode.MULTIPLY);
+            adicionarEventoAoPressionarTecla(multiplicacao, KeyCode.DIGIT8, true);
 
             adicionarEventoAoPressionarTecla(divisao, KeyCode.DIVIDE);
+            adicionarEventoAoPressionarTecla(divisao, KeyCode.SLASH);
 
             adicionarEventoAoPressionarTecla(igual, KeyCode.ENTER);
+            adicionarEventoAoPressionarTecla(igual, KeyCode.EQUALS);
 
             adicionarEventoAoPressionarTecla(virgula, KeyCode.COMMA);
             adicionarEventoAoPressionarTecla(virgula, KeyCode.DECIMAL);
+
+            adicionarEventoAoPressionarTecla(porcentagem, KeyCode.DIGIT5, true);
         });
     }
 
     private void adicionarEventoAoPressionarTecla(Button botao, KeyCode codigo_tecla) {
+        adicionarEventoAoPressionarTecla(botao, codigo_tecla, false);
+    }
+
+    private void adicionarEventoAoPressionarTecla(Button botao, KeyCode codigo_tecla, boolean shiftativado) {
         botao.getScene().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == codigo_tecla) {
-                botao.arm();
-                botao.fire();
-                entrada.getParent().requestFocus(); 
+                if (shiftativado && event.isShiftDown()) {
+                    botao.arm();
+                    botao.fire();
+                    entrada.getParent().requestFocus(); 
+                }else if(!shiftativado && !event.isShiftDown()){
+                    botao.arm();
+                    botao.fire();
+                    entrada.getParent().requestFocus(); 
+                }
             }
         });
 
