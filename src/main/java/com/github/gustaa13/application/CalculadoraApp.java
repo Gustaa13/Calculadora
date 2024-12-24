@@ -1,4 +1,4 @@
-package com.github.gustaa13;
+package com.github.gustaa13.application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,19 +11,17 @@ import java.io.IOException;
 /**
  * JavaFX App
  */
-public class App extends Application {
+public class CalculadoraApp extends Application {
 
     private static Scene scene;
 
-    @SuppressWarnings("exports")
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("calculadora-padrao"), 400, 550);
-        
+        scene = new Scene(loadFXML("/com/github/gustaa13/calculadora-padrao"), 400, 550);
+
         scene.getStylesheets().add(getClass().getResource("/com/github/gustaa13/style.css").toExternalForm());
 
         stage.setResizable(false);
-
         stage.setTitle("Calculadora");
         stage.setScene(scene);
         stage.show();
@@ -34,7 +32,7 @@ public class App extends Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(CalculadoraApp.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 

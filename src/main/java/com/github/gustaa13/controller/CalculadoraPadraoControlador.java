@@ -1,13 +1,17 @@
-package com.github.gustaa13;
+package com.github.gustaa13.controller;
+
+import com.github.gustaa13.model.InterpretadorCalculadora;
+import com.github.gustaa13.util.AlertaUtil;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-public class controladorCalculadoraPadrao {
+public class CalculadoraPadraoControlador {
 
     @FXML
     private Button apagar;
@@ -73,7 +77,8 @@ public class controladorCalculadoraPadrao {
     private Button zero;
 
     private static final String OPERADORES = "+-x÷%,";
-    private boolean permitirVirgula;
+    private Integer contadorDeAlgarismos;
+    private boolean permitirVirgula; 
 
     private StringBuilder expressao = new StringBuilder();
 
@@ -83,21 +88,36 @@ public class controladorCalculadoraPadrao {
 
     }
 
-    public void adicionarTexto(String texto){
+    public void adicionarTexto(String caracter){
 
-        if(texto.matches("[0-9]")){ 
-            expressao.append(texto);
+        if(expressao.length() >= 100){
+            AlertaUtil alertaDeCaracteres = new AlertaUtil(AlertType.INFORMATION, "Alerta de caraceteres", "Não é possível inserir mais de 100 caracteres.");
+
+            alertaDeCaracteres.janelaDeAlerta();
+            return;
         }
-        else if(texto.equals(",")){
+
+        if(caracter.matches("[0-9]")){ 
+            if(contadorDeAlgarismos >= 15){
+                AlertaUtil alertaDeAlgarismos = new AlertaUtil(AlertType.INFORMATION, "Alerta de dígitos", "Não é possível inserir mais de 15 dígitos.");
+    
+                alertaDeAlgarismos.janelaDeAlerta();
+            }else{
+                expressao.append(caracter);
+                contadorDeAlgarismos++;
+            }
+        }
+        else if(caracter.equals(",")){
             if(podeAdicionarCaracter() && !expressao.toString().endsWith(",") && permitirVirgula){
-                expressao.append(texto);
+                expressao.append(caracter);
                 permitirVirgula = false; 
             }
         }
-        else if(texto.matches("[+\\-x÷]")){ 
+        else if(caracter.matches("[+\\-x÷]")){ 
             if(podeAdicionarCaracter()){
-                expressao.append(texto);
+                expressao.append(caracter);
                 permitirVirgula = true; 
+                contadorDeAlgarismos = 0;
             }
         }
 
@@ -108,9 +128,13 @@ public class controladorCalculadoraPadrao {
 
     @FXML
     private void pressionarApagar(){
-        if (expressao.length() > 0) {
+        if(expressao.length() > 0){
+
+            if(Character.isDigit(expressao.charAt(expressao.length() - 1))) contadorDeAlgarismos--;
+            if(expressao.charAt(expressao.length() - 1) == ',') permitirVirgula = true;
+    
             expressao.deleteCharAt(expressao.length() - 1);
-            entrada.setText(expressao.toString());
+            entrada.setText(expressao.length() > 0 ? expressao.toString() : "0");     
 
             entrada.positionCaret(entrada.getLength());
         }
@@ -118,6 +142,8 @@ public class controladorCalculadoraPadrao {
 
     @FXML
     private void pressionarApagarTudo(){
+        contadorDeAlgarismos = 0;
+        permitirVirgula = true;
         expressao.setLength(0);
         entrada.setText("0");
         entrada.positionCaret(entrada.getLength());
@@ -195,10 +221,15 @@ public class controladorCalculadoraPadrao {
 
     @FXML
     private void pressionarIgual(){
-        entrada.setText("42");
+        InterpretadorCalculadora interpretador = new InterpretadorCalculadora(expressao.toString());
+        interpretador.calcularResultadoTotal();
+
+        entrada.setText(interpretador.getResultado());
         
+        contadorDeAlgarismos = 0;
+        permitirVirgula = true;
         expressao.setLength(0);
-        entrada.positionCaret(entrada.getLength());
+        entrada.positionCaret(0);
     }
 
     @FXML
@@ -209,6 +240,7 @@ public class controladorCalculadoraPadrao {
     @FXML
     public void initialize(){
         permitirVirgula = true;
+        contadorDeAlgarismos = 0;
 
         Platform.runLater(() -> {
             entrada.getParent().requestFocus();
@@ -242,7 +274,7 @@ public class controladorCalculadoraPadrao {
             adicionarEventoAoPressionarTecla(sete, KeyCode.NUMPAD7); 
 
             adicionarEventoAoPressionarTecla(oito, KeyCode.DIGIT8);
-            adicionarEventoAoPressionarTecla(oito, KeyCode.NUMPAD9);
+            adicionarEventoAoPressionarTecla(oito, KeyCode.NUMPAD8);
 
             adicionarEventoAoPressionarTecla(nove, KeyCode.DIGIT9);
             adicionarEventoAoPressionarTecla(nove, KeyCode.NUMPAD9);
