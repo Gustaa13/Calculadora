@@ -33,6 +33,18 @@ public class InterpretadorCalculadora {
         String resultadoComVirgula;
         int index;
 
+        while(partes.contains("%")){
+            index = partes.indexOf("%");
+
+            BigDecimal num1 = new BigDecimal(partes.get(index - 1));
+
+            String valor = Calculadora.porcentagem(num1).toString();
+
+            partes.set(index - 1, valor);
+
+            partes.remove(index);
+        }
+
         while(partes.contains("x")){
 
             index = partes.indexOf("x");
@@ -98,14 +110,42 @@ public class InterpretadorCalculadora {
         }
 
         if(partes.get(0).contains(".")){
-            index = partes.get(0).indexOf(".");
-
-            resultadoComVirgula = partes.get(0).substring(0, index) + "," + partes.get(0).substring(index + 1);
-
-            resultado = resultadoComVirgula;
-        }else{
-            resultado = partes.get(0);
+            partes.set(0, partes.get(0).replaceAll("\\.?0*$", ""));
         }
+
+        if(partes.get(0).contains(".")){
+            index = partes.get(0).indexOf(".");
+            StringBuilder parteInteira = new StringBuilder(partes.get(0).substring(0, index));
+            StringBuilder parteDecimal = new StringBuilder(partes.get(0).substring(index, partes.get(0).length()));
+
+            if(parteInteira.length() > 3){
+                double quantidadeDePontos = (double) parteInteira.length() / 3 - 1;
+                quantidadeDePontos = Math.ceil(quantidadeDePontos);
+                for(int i = 1; i <= quantidadeDePontos; i++){
+                    parteInteira.insert(parteInteira.length() - (i * 4) + 1, '.');
+                }
+            }
+
+            parteDecimal.setCharAt(0, ',');
+
+            resultadoComVirgula = String.valueOf(parteInteira) + String.valueOf(parteDecimal);
+
+            partes.set(0, resultadoComVirgula);
+        }else{
+            StringBuilder numero = new StringBuilder(partes.get(0));
+
+            if(numero.length() > 3){
+                double quantidadeDePontos = (double) numero.length() / 3 - 1;
+                quantidadeDePontos = Math.ceil(quantidadeDePontos);
+                for(int i = 1; i <= quantidadeDePontos; i++){
+                    numero.insert(numero.length() - (i * 4) + 1, '.');
+                }
+            }
+
+            partes.set(0, String.valueOf(numero));
+        }
+        
+        resultado = partes.get(0);
     }
 
     private List<String> separadorDeExpressao(){
@@ -117,7 +157,7 @@ public class InterpretadorCalculadora {
                 numero.append(c);
             }else if(c == ','){
                 numero.append(".");
-            }else if("+-x÷".indexOf(c) != -1){
+            }else if("+-x÷%".indexOf(c) != -1){
                 if(numero.length() > 0){
                     partes.add(numero.toString());
                     numero.setLength(0);

@@ -18,14 +18,10 @@ public class Calculadora {
     }
 
     public static BigDecimal divisao(BigDecimal num1, BigDecimal num2){
-        BigDecimal resultadoBig = num1.divide(num2,3, RoundingMode.HALF_UP);
+        return num1.divide(num2,3, RoundingMode.HALF_UP);
+    }
 
-        String resultado = resultadoBig.toString();
-
-        if(resultado.contains(".")){
-            resultado = resultado.replaceAll("\\.?0*$", "");
-        }
-
-        return new BigDecimal(resultado);
+    public static BigDecimal porcentagem(BigDecimal num1){
+        return divisao(num1, new BigDecimal(100));
     }
 }

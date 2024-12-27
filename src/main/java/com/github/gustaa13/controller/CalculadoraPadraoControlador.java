@@ -76,9 +76,10 @@ public class CalculadoraPadraoControlador {
     @FXML
     private Button zero;
 
-    private static final String OPERADORES = "+-x÷%,";
+    private static final String OPERADORES = "+-x÷,";
     private Integer contadorDeAlgarismos;
     private boolean permitirVirgula; 
+    private boolean permitirPorcentagem;
 
     private StringBuilder expressao = new StringBuilder();
 
@@ -136,6 +137,11 @@ public class CalculadoraPadraoControlador {
                 AlertaUtil alertaDeAlgarismos = new AlertaUtil(AlertType.INFORMATION, "Alerta de dígitos", "Não é possível inserir mais de 15 dígitos.", 1.5);
     
                 alertaDeAlgarismos.janelaDeAlerta();
+            }else if(expressao.length() > 0 && (expressao.charAt(expressao.length() - 1) == '%')){
+                expressao.append("x" + caracter);
+                permitirPorcentagem = true;
+                permitirVirgula = true;
+                contadorDeAlgarismos++;
             }else{
                 expressao.append(caracter);
                 contadorDeAlgarismos++;
@@ -156,6 +162,15 @@ public class CalculadoraPadraoControlador {
                 expressao.append(caracter);
                 permitirVirgula = true; 
                 contadorDeAlgarismos = 0;
+                permitirPorcentagem = true;
+            }
+        }
+        else if(caracter.equals("%")){
+            if(expressao.length() > 0 && permitirPorcentagem && contadorDeAlgarismos > 0){
+                expressao.append(caracter);
+                permitirVirgula = true;
+                contadorDeAlgarismos = 0;
+                permitirPorcentagem = false;
             }
         }
 
@@ -170,6 +185,7 @@ public class CalculadoraPadraoControlador {
 
             if(Character.isDigit(expressao.charAt(expressao.length() - 1))) contadorDeAlgarismos--;
             if(expressao.charAt(expressao.length() - 1) == ',') permitirVirgula = true;
+            if(expressao.charAt(expressao.length() - 1) == '%') permitirPorcentagem = true;
     
             expressao.deleteCharAt(expressao.length() - 1);
             entrada.setText(expressao.length() > 0 ? expressao.toString() : "0");     
@@ -182,6 +198,7 @@ public class CalculadoraPadraoControlador {
     private void pressionarApagarTudo(){
         contadorDeAlgarismos = 0;
         permitirVirgula = true;
+        permitirPorcentagem = true;
         expressao.setLength(0);
         entrada.setText("0");
         entrada.positionCaret(entrada.getLength());
@@ -268,6 +285,7 @@ public class CalculadoraPadraoControlador {
         entrada.setText(interpretador.getResultado());
         
         contadorDeAlgarismos = 0;
+        permitirPorcentagem = true;
         permitirVirgula = true;
         expressao.setLength(0);
         entrada.positionCaret(0);
@@ -286,6 +304,7 @@ public class CalculadoraPadraoControlador {
     @FXML
     public void initialize(){
         permitirVirgula = true;
+        permitirPorcentagem = true;
         contadorDeAlgarismos = 0;
 
         Platform.runLater(() -> {
