@@ -1,5 +1,10 @@
 package com.github.gustaa13.controller;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.github.gustaa13.model.InterpretadorCalculadora;
 import com.github.gustaa13.util.AlertaUtil;
 
@@ -83,6 +88,34 @@ public class CalculadoraPadraoControlador {
 
     private StringBuilder expressao = new StringBuilder();
 
+    private String formatarNumero(String entrada) {
+        Pattern padrao = Pattern.compile("\\d+(?:,\\d{1,2})?");
+        Matcher correspondencia = padrao.matcher(entrada);
+
+        DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+        simbolos.setGroupingSeparator('.');
+        simbolos.setDecimalSeparator(',');
+
+        StringBuffer resultado = new StringBuffer();
+        while (correspondencia.find()) {
+            String numero = correspondencia.group();
+            try {
+                numero = numero.replace(",", ".");
+                
+                double valorNumerico = Double.parseDouble(numero);
+                DecimalFormat formatoDecimal = new DecimalFormat("#,###.###", simbolos);
+                String numeroFormatado = formatoDecimal.format(valorNumerico);
+                
+                correspondencia.appendReplacement(resultado, numeroFormatado);
+            } catch (NumberFormatException e) {
+                correspondencia.appendReplacement(resultado, numero);
+            }
+        }
+        correspondencia.appendTail(resultado);
+
+        return resultado.toString();
+    }
+
     private boolean podeAdicionarCaracter(){
 
         return expressao.length() > 0 && !OPERADORES.contains(String.valueOf(expressao.charAt(expressao.length() - 1)));
@@ -142,12 +175,14 @@ public class CalculadoraPadraoControlador {
                 permitirPorcentagem = true;
                 permitirVirgula = true;
                 contadorDeAlgarismos++;
-            }else{
+            }else if(numeroAnteriorIgualaZero() && caracter.equals("0") && contadorDeAlgarismos > 0){
+                return;
+            }
+            else{
                 expressao.append(caracter);
                 contadorDeAlgarismos++;
             }
-        }
-        else if(caracter.equals(",")){
+        }else if(caracter.equals(",")){
             if(permitirVirgula && contadorDeAlgarismos == 0){
                 expressao.append("0,");
                 permitirVirgula = false; 
@@ -156,16 +191,14 @@ public class CalculadoraPadraoControlador {
                 expressao.append(caracter);
                 permitirVirgula = false; 
             }
-        }
-        else if(caracter.matches("[+\\-x÷]")){ 
+        }else if(caracter.matches("[+\\-x÷]")){ 
             if(podeAdicionarCaracter() && !erroDivisaoPorZero()){    
                 expressao.append(caracter);
                 permitirVirgula = true; 
                 contadorDeAlgarismos = 0;
                 permitirPorcentagem = true;
             }
-        }
-        else if(caracter.equals("%")){
+        }else if(caracter.equals("%")){
             if(expressao.length() > 0 && permitirPorcentagem && contadorDeAlgarismos > 0){
                 expressao.append(caracter);
                 permitirVirgula = true;
@@ -174,8 +207,8 @@ public class CalculadoraPadraoControlador {
             }
         }
 
-        entrada.setText(expressao.toString());
-
+        entrada.setText(formatarNumero(expressao.toString()));
+        
         entrada.positionCaret(entrada.getLength());
     }
 
@@ -183,12 +216,12 @@ public class CalculadoraPadraoControlador {
     private void pressionarApagar(){
         if(expressao.length() > 0){
 
-            if(Character.isDigit(expressao.charAt(expressao.length() - 1))) contadorDeAlgarismos--;
+            if(Character.isDigit(expressao.charAt(expressao.length() - 1)) && contadorDeAlgarismos > 0) contadorDeAlgarismos--;
             if(expressao.charAt(expressao.length() - 1) == ',') permitirVirgula = true;
             if(expressao.charAt(expressao.length() - 1) == '%') permitirPorcentagem = true;
     
             expressao.deleteCharAt(expressao.length() - 1);
-            entrada.setText(expressao.length() > 0 ? expressao.toString() : "0");     
+            entrada.setText(expressao.length() > 0 ? formatarNumero(expressao.toString()) : "0");     
 
             entrada.positionCaret(entrada.getLength());
         }
