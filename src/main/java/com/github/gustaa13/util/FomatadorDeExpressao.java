@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 
 public class FomatadorDeExpressao {
     
-    public static String formatar(String entrada) {
-        Pattern padrao = Pattern.compile("\\d+(?:,\\d{1,2})?");
+    public static String formatar(String entrada){
+        Pattern padrao = Pattern.compile("\\d+(?:,\\d{1,14})?");
         Matcher correspondencia = padrao.matcher(entrada);
 
         DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
@@ -21,10 +21,19 @@ public class FomatadorDeExpressao {
             try {
                 numero = numero.replace(",", ".");
                 
-                double valorNumerico = Double.parseDouble(numero);
-                DecimalFormat formatoDecimal = new DecimalFormat("#,###.###", simbolos);
-                String numeroFormatado = formatoDecimal.format(valorNumerico);
+                String[] partes = numero.split("\\.");
+                String parteInteira = partes[0];
+                String parteDecimal = partes.length > 1 ? partes[1] : "";
                 
+                DecimalFormat formatoInteiro = new DecimalFormat("#,###", simbolos);
+                parteInteira = formatoInteiro.format(Long.parseLong(parteInteira));
+
+                String numeroFormatado = parteInteira;
+
+                if (!parteDecimal.isEmpty()) {
+                    numeroFormatado += "," + parteDecimal;
+                }
+
                 correspondencia.appendReplacement(resultado, numeroFormatado);
             } catch (NumberFormatException e) {
                 correspondencia.appendReplacement(resultado, numero);

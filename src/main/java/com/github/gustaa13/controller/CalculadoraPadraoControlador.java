@@ -78,12 +78,17 @@ public class CalculadoraPadraoControlador {
 
     ExpressoesPadroes calculadoraPadrao;
 
-    public void adicionarTexto(String caracter){
+    public void aplicarTecla(String caracter){
 
         calculadoraPadrao.adicionarCaracterNaExpressao(caracter);
 
-        entrada.setText(FomatadorDeExpressao.formatar(calculadoraPadrao.getExpressao().toString()));
-        
+        if(!calculadoraPadrao.expressaoExiste()){
+            entrada.setText("0");
+        }else{
+            entrada.setText(FomatadorDeExpressao.formatar(calculadoraPadrao.getExpressao().toString()));
+        }
+
+        entrada.requestFocus();
         entrada.positionCaret(entrada.getLength());
     }
 
@@ -92,6 +97,7 @@ public class CalculadoraPadraoControlador {
         calculadoraPadrao.apagarCaractereDaExpresssao();
         entrada.setText(calculadoraPadrao.getExpressao().length() > 0 ? FomatadorDeExpressao.formatar(calculadoraPadrao.getExpressao().toString()) : "0");     
 
+        entrada.requestFocus();
         entrada.positionCaret(entrada.getLength());
     }
 
@@ -99,100 +105,103 @@ public class CalculadoraPadraoControlador {
     private void pressionarApagarTudo(){
         calculadoraPadrao.apagarExpressao();
         entrada.setText("0");
+        entrada.requestFocus();
         entrada.positionCaret(entrada.getLength());
     }
 
     @FXML
     private void pressionarZero(){
-        adicionarTexto(zero.getText());
+        aplicarTecla(zero.getText());
     }
 
     @FXML
     private void pressionarUm(){
-        adicionarTexto(um.getText());
+        aplicarTecla(um.getText());
     }
 
     @FXML
     private void pressionarDois(){
-        adicionarTexto(dois.getText());
+        aplicarTecla(dois.getText());
     }
 
     @FXML
     private void pressionarTres(){
-        adicionarTexto(tres.getText());
+        aplicarTecla(tres.getText());
     }
 
     @FXML
     private void pressionarQuatro(){
-        adicionarTexto(quatro.getText());
+        aplicarTecla(quatro.getText());
     }
 
     @FXML
     private void pressionarCinco(){
-        adicionarTexto(cinco.getText());
+        aplicarTecla(cinco.getText());
     }
 
     @FXML
     private void pressionarSeis(){
-        adicionarTexto(seis.getText());
+        aplicarTecla(seis.getText());
     }
 
     @FXML
     private void pressionarSete(){
-        adicionarTexto(sete.getText());
+        aplicarTecla(sete.getText());
     }
 
     @FXML
     private void pressionarOito(){
-        adicionarTexto(oito.getText());
+        aplicarTecla(oito.getText());
     }
 
     @FXML
     private void pressionarNove(){
-        adicionarTexto(nove.getText());
+        aplicarTecla(nove.getText());
     }
 
     @FXML
     private void pressionarSoma(){
-        adicionarTexto(soma.getText());
+        aplicarTecla(soma.getText());
     }
 
     @FXML
     private void pressionarSubtracao(){
-        adicionarTexto(subtracao.getText());
+        aplicarTecla(subtracao.getText());
     }
 
     @FXML
     private void pressionarMultiplicacao(){
-        adicionarTexto(multiplicacao.getText());
+        aplicarTecla(multiplicacao.getText());
     }
 
     @FXML
     private void pressionarDivisao(){
-        adicionarTexto(divisao.getText());
+        aplicarTecla(divisao.getText());
     }
 
     @FXML
     private void pressionarIgual(){
+        if(!calculadoraPadrao.expressaoExiste()) return;
         InterpretadorCalculadora interpretador = new InterpretadorCalculadora(calculadoraPadrao.getExpressao().toString());
 
         if(calculadoraPadrao.concluirExpressao()){
             interpretador.calcularResultadoTotal();
     
-            entrada.setText(interpretador.getResultado());
+            entrada.setText(FomatadorDeExpressao.formatar(interpretador.getResultado()));
             
+            entrada.requestFocus();
             entrada.positionCaret(0); 
         } 
     }
 
     @FXML
     private void pressionarVirgula(){
-        adicionarTexto(virgula.getText());
+        aplicarTecla(virgula.getText());
     }
 
     @FXML
     private void pressionarPorcentagem(){
-        adicionarTexto(porcentagem.getText());
+        aplicarTecla(porcentagem.getText());
     }
 
     @FXML

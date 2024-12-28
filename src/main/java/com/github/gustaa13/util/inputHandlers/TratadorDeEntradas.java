@@ -79,7 +79,12 @@ public abstract class TratadorDeEntradas{
             index = expressao.length() - 2 - contadorDeAlgarismos;
         }
 
-        return index;
+        if(index > 0) {
+            return index;
+        }else{
+            return 0;
+        }
+        
     }
 
     protected boolean erroDivisaoPorZero(){
@@ -104,6 +109,11 @@ public abstract class TratadorDeEntradas{
         }
     }
 
+    public boolean expressaoExiste(){
+        if(expressao.length() > 0) return true;
+        else return false;
+    }
+
     public boolean concluirExpressao(){
         if(erroDivisaoPorZero()) return false;
 
@@ -123,6 +133,7 @@ public abstract class TratadorDeEntradas{
     }
 
     public void apagarCaractereDaExpresssao(){
+        if(expressao.length() <= 0) return; 
         if(Character.isDigit(expressao.charAt(expressao.length() - 1)) && contadorDeAlgarismos > 0) contadorDeAlgarismos--;
         if(expressao.charAt(expressao.length() - 1) == ',') permitirVirgula = true;
         if(expressao.charAt(expressao.length() - 1) == '%') permitirPorcentagem = true;

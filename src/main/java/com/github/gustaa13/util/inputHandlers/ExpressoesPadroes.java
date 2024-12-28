@@ -45,6 +45,8 @@ public class ExpressoesPadroes extends TratadorDeEntradas {
                 setContadorDeAlgarismos(getContadorDeAlgarismos() + 1);
             }else if(numeroAnteriorIgualaZero() && caractere.equals("0") && getContadorDeAlgarismos() > 0){
                 return;
+            }else if(caractere.equals("0") && !expressaoExiste()){
+                return;
             }
             else{
                 getExpressao().append(caractere);
