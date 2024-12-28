@@ -8,27 +8,24 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * JavaFX App
- */
 public class CalculadoraApp extends Application {
 
-    private static Scene scene;
+    private static Scene cena;
 
     @Override
-    public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("/com/github/gustaa13/calculadora-padrao"), 400, 550);
+    public void start(Stage palco) throws IOException {
+        cena = new Scene(loadFXML("/com/github/gustaa13/calculadora-padrao"), 400, 550);
 
-        scene.getStylesheets().add(getClass().getResource("/com/github/gustaa13/style.css").toExternalForm());
+        cena.getStylesheets().add(getClass().getResource("/com/github/gustaa13/style.css").toExternalForm());
 
-        stage.setResizable(false);
-        stage.setTitle("Calculadora");
-        stage.setScene(scene);
-        stage.show();
+        palco.setResizable(false);
+        palco.setTitle("Calculadora");
+        palco.setScene(cena);
+        palco.show();
     }
 
     static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+        cena.setRoot(loadFXML(fxml));
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
