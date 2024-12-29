@@ -18,7 +18,7 @@ public class Calculadora {
     }
 
     public static BigDecimal divisao(BigDecimal num1, BigDecimal num2){
-        return num1.divide(num2,3, RoundingMode.HALF_UP);
+        return num1.divide(num2,14, RoundingMode.HALF_UP);
     }
 
     public static BigDecimal porcentagem(BigDecimal num1){

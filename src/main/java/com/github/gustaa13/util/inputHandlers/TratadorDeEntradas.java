@@ -6,7 +6,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public abstract class TratadorDeEntradas{
 
-    private static final String OPERADORES = "+-x÷,";
+    private static final String OPERADORES = "+-x÷";
     private Integer contadorDeAlgarismos;
     private boolean permitirVirgula; 
     private boolean permitirPorcentagem;
@@ -20,7 +20,8 @@ public abstract class TratadorDeEntradas{
         return contadorDeAlgarismos;
     }
 
-    public void setContadorDeAlgarismos(Integer contadorDeAlgarismos) {
+    public void setContadorDeAlgarismos(Integer contadorDeAlgarismos){
+        if(contadorDeAlgarismos > 15 || contadorDeAlgarismos < 0) return;
         this.contadorDeAlgarismos = contadorDeAlgarismos;
     }
 
@@ -67,28 +68,24 @@ public abstract class TratadorDeEntradas{
     public abstract void adicionarCaracterNaExpressao(String caractere);
 
     protected boolean podeAdicionarCaracter(){
-        return expressao.length() > 0 && !OPERADORES.contains(String.valueOf(expressao.charAt(expressao.length() - 1)));
+        return expressao.length() > 0 && !(OPERADORES + ",").contains(String.valueOf(expressao.charAt(expressao.length() - 1)));
     }
 
     protected int PosicaoDoUltimoNumero(){
-        int index;
+        int index = 0;
 
-        if(permitirVirgula){
-            index = expressao.length() - 1 - contadorDeAlgarismos;
-        }else{
-            index = expressao.length() - 2 - contadorDeAlgarismos;
-        }
-
-        if(index > 0) {
-            return index;
-        }else{
-            return 0;
+        for(int i = expressao.length() - 1; i > 0; i--){
+            if(String.valueOf(expressao.charAt(i)).matches("[+\\-x÷]")){
+                index = i + 1;
+                i = -1;
+            }
         }
         
+        return index;
     }
 
     protected boolean erroDivisaoPorZero(){
-        if(numeroAnteriorIgualaZero() && expressao.charAt(PosicaoDoUltimoNumero()) == '÷'){
+        if(numeroAnteriorIgualaZero() && expressao.charAt(PosicaoDoUltimoNumero() - 1) == '÷'){
             AlertaGeral erroDivisaoPorZero = new AlertaGeral(AlertType.ERROR, "Erro de Divisão por Zero", "Não é possível dividir por zero.", 2.0);
 
             erroDivisaoPorZero.janelaDeAlerta();
@@ -100,13 +97,10 @@ public abstract class TratadorDeEntradas{
     }
 
     protected boolean numeroAnteriorIgualaZero(){
-        String ultimoNumero = expressao.substring(Math.max(0, PosicaoDoUltimoNumero()));
-        
-        if(!ultimoNumero.matches(".*[1-9].*")){
-            return true;
-        }else{
-            return false;
-        }
+        String ultimoNumero = expressao.substring(PosicaoDoUltimoNumero());
+
+        if(!ultimoNumero.matches(".*[1-9].*")) return true;
+        else return false;
     }
 
     public boolean expressaoExiste(){
@@ -134,7 +128,7 @@ public abstract class TratadorDeEntradas{
 
     public void apagarCaractereDaExpresssao(){
         if(expressao.length() <= 0) return; 
-        if(Character.isDigit(expressao.charAt(expressao.length() - 1)) && contadorDeAlgarismos > 0) contadorDeAlgarismos--;
+        if(Character.isDigit(expressao.charAt(expressao.length() - 1)) && contadorDeAlgarismos > 0) contadorDeAlgarismos = expressao.length() - 1 - PosicaoDoUltimoNumero();
         if(expressao.charAt(expressao.length() - 1) == ',') permitirVirgula = true;
         if(expressao.charAt(expressao.length() - 1) == '%') permitirPorcentagem = true;
 

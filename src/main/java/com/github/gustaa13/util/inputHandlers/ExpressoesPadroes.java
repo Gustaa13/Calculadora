@@ -43,7 +43,7 @@ public class ExpressoesPadroes extends TratadorDeEntradas {
                 setPermitirPorcentagem(true);
                 setPermitirVirgula(true);
                 setContadorDeAlgarismos(getContadorDeAlgarismos() + 1);
-            }else if(numeroAnteriorIgualaZero() && caractere.equals("0") && getContadorDeAlgarismos() > 0){
+            }else if(numeroAnteriorIgualaZero() && caractere.equals("0") && getContadorDeAlgarismos() > 0 && getPermitirVirgula()){
                 return;
             }else if(caractere.equals("0") && !expressaoExiste()){
                 return;
