@@ -35,9 +35,9 @@ public class ExpressoesPadroes extends TratadorDeEntradas {
 
         if(caractere.matches("[0-9]")){ 
             if(getContadorDeAlgarismos() >= 15){
-                AlertaGeral alertaDeAlgarismos = new AlertaGeral(AlertType.INFORMATION, "Alerta de dígitos", "Não é possível inserir mais de 15 dígitos.", 1.5);
+                /*AlertaGeral alertaDeAlgarismos = new AlertaGeral(AlertType.INFORMATION, "Alerta de dígitos", "Não é possível inserir mais de 15 dígitos.", 1.5);
     
-                alertaDeAlgarismos.janelaDeAlerta();
+                alertaDeAlgarismos.janelaDeAlerta();*/
             }else if(getExpressao().length() > 0 && (getExpressao().charAt(getExpressao().length() - 1) == '%')){
                 getExpressao().append("x" + caractere);
                 setPermitirPorcentagem(true);
@@ -57,7 +57,7 @@ public class ExpressoesPadroes extends TratadorDeEntradas {
                 getExpressao().append("0,");
                 setPermitirVirgula(false);
                 setContadorDeAlgarismos(getContadorDeAlgarismos() + 1);
-            }else if(getPermitirVirgula()){
+            }else if(getPermitirVirgula() && getContadorDeAlgarismos() < 15){
                 getExpressao().append(caractere);
                 setPermitirVirgula(false);
             }

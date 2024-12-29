@@ -1,6 +1,11 @@
 .text-field {
     -fx-text-fill: rgb(85, 85, 85);
+    -fx-font-size: 28px;
     -fx-background-color: white;
+}
+
+.button {
+    
 }
 
 .button:focused {

@@ -14,7 +14,9 @@ public class Calculadora {
     }
 
     public static BigDecimal multiplicacao(BigDecimal num1, BigDecimal num2){
-        return num1.multiply(num2);
+        BigDecimal numeroBig = num1.multiply(num2);
+
+        return numeroBig;
     }
 
     public static BigDecimal divisao(BigDecimal num1, BigDecimal num2){

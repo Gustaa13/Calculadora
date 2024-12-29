@@ -1,5 +1,6 @@
 package com.github.gustaa13.util;
 
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.regex.Matcher;
@@ -8,7 +9,7 @@ import java.util.regex.Pattern;
 public class FomatadorDeExpressao {
     
     public static String formatar(String entrada){
-        Pattern padrao = Pattern.compile("\\d+(?:,\\d{1,14})?");
+        Pattern padrao = Pattern.compile("\\d+(?:,\\d{1,26})?");
         Matcher correspondencia = padrao.matcher(entrada);
 
         DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
@@ -25,8 +26,9 @@ public class FomatadorDeExpressao {
                 String parteInteira = partes[0];
                 String parteDecimal = partes.length > 1 ? partes[1] : "";
                 
+                BigInteger numeroInteiro = new BigInteger(parteInteira);
                 DecimalFormat formatoInteiro = new DecimalFormat("#,###", simbolos);
-                parteInteira = formatoInteiro.format(Long.parseLong(parteInteira));
+                parteInteira = formatoInteiro.format(numeroInteiro);
 
                 String numeroFormatado = parteInteira;
 
