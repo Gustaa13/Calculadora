@@ -14,9 +14,9 @@
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-            <Menu mnemonicParsing="false" text="Calculadoras">
+            <Menu mnemonicParsing="false" text="Padrão">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Científica" />
+                  <MenuItem mnemonicParsing="false" onAction="#trocarParaCalculadoraCientifica" text="Científica" />
                </items>
             </Menu>
         <Menu mnemonicParsing="false" text="Histórico" />
@@ -24,25 +24,25 @@
     </MenuBar>
     <AnchorPane prefHeight="524.0" prefWidth="400.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="zero" layoutX="104.0" layoutY="452.0" mnemonicParsing="false" onAction="#pressionarZero" prefHeight="62.0" prefWidth="92.0" text="0" />
-            <Button fx:id="virgula" layoutX="202.0" layoutY="452.0" mnemonicParsing="false" onAction="#pressionarVirgula" prefHeight="62.0" prefWidth="92.0" text="," />
-            <Button fx:id="igual" layoutX="300.0" layoutY="384.0" mnemonicParsing="false" onAction="#pressionarIgual" prefHeight="130.0" prefWidth="92.0" text="=" />
-            <Button fx:id="um" layoutX="6.0" layoutY="384.0" mnemonicParsing="false" onAction="#pressionarUm" prefHeight="62.0" prefWidth="92.0" text="1" />
-            <Button fx:id="dois" layoutX="104.0" layoutY="384.0" mnemonicParsing="false" onAction="#pressionarDois" prefHeight="62.0" prefWidth="92.0" text="2" />
-            <Button fx:id="tres" layoutX="202.0" layoutY="384.0" mnemonicParsing="false" onAction="#pressionarTres" prefHeight="62.0" prefWidth="92.0" text="3" />
-            <Button fx:id="soma" layoutX="300.0" layoutY="316.0" mnemonicParsing="false" onAction="#pressionarSoma" prefHeight="62.0" prefWidth="92.0" text="+" />
-            <Button fx:id="quatro" layoutX="6.0" layoutY="316.0" mnemonicParsing="false" onAction="#pressionarQuatro" prefHeight="62.0" prefWidth="92.0" text="4" />
-            <Button fx:id="cinco" layoutX="104.0" layoutY="316.0" mnemonicParsing="false" onAction="#pressionarCinco" prefHeight="62.0" prefWidth="92.0" text="5" />
-            <Button fx:id="seis" layoutX="202.0" layoutY="316.0" mnemonicParsing="false" onAction="#pressionarSeis" prefHeight="62.0" prefWidth="92.0" text="6" />
-            <Button fx:id="subtracao" layoutX="300.0" layoutY="248.0" mnemonicParsing="false" onAction="#pressionarSubtracao" prefHeight="62.0" prefWidth="92.0" text="-" />
-            <Button fx:id="sete" layoutX="6.0" layoutY="248.0" mnemonicParsing="false" onAction="#pressionarSete" prefHeight="62.0" prefWidth="92.0" text="7" />
-            <Button fx:id="oito" layoutX="104.0" layoutY="248.0" mnemonicParsing="false" onAction="#pressionarOito" prefHeight="62.0" prefWidth="92.0" text="8" />
-            <Button fx:id="nove" layoutX="202.0" layoutY="248.0" mnemonicParsing="false" onAction="#pressionarNove" prefHeight="62.0" prefWidth="92.0" text="9" />
-            <Button fx:id="multiplicacao" layoutX="300.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarMultiplicacao" prefHeight="62.0" prefWidth="92.0" text="x" />
-            <Button fx:id="apagarTudo" layoutX="6.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarApagarTudo" prefHeight="62.0" prefWidth="92.0" text="C" />
-            <Button fx:id="apagar" layoutX="104.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarApagar" prefHeight="62.0" prefWidth="92.0" text="&lt;-" />
-            <Button fx:id="porcentagem" layoutX="6.0" layoutY="452.0" mnemonicParsing="false" onAction="#pressionarPorcentagem" prefHeight="62.0" prefWidth="92.0" text="\%" />
-            <Button fx:id="divisao" layoutX="202.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarDivisao" prefHeight="62.0" prefWidth="92.0" text="÷" />
+            <Button fx:id="zero" layoutX="105.0" layoutY="452.0" mnemonicParsing="false" onAction="#pressionarZero" prefHeight="62.0" prefWidth="92.0" text="0" />
+            <Button fx:id="virgula" layoutX="203.0" layoutY="452.0" mnemonicParsing="false" onAction="#pressionarVirgula" prefHeight="62.0" prefWidth="92.0" text="," />
+            <Button fx:id="igual" layoutX="301.0" layoutY="384.0" mnemonicParsing="false" onAction="#pressionarIgual" prefHeight="130.0" prefWidth="92.0" text="=" />
+            <Button fx:id="um" layoutX="7.0" layoutY="384.0" mnemonicParsing="false" onAction="#pressionarUm" prefHeight="62.0" prefWidth="92.0" text="1" />
+            <Button fx:id="dois" layoutX="105.0" layoutY="384.0" mnemonicParsing="false" onAction="#pressionarDois" prefHeight="62.0" prefWidth="92.0" text="2" />
+            <Button fx:id="tres" layoutX="203.0" layoutY="384.0" mnemonicParsing="false" onAction="#pressionarTres" prefHeight="62.0" prefWidth="92.0" text="3" />
+            <Button fx:id="soma" layoutX="301.0" layoutY="316.0" mnemonicParsing="false" onAction="#pressionarSoma" prefHeight="62.0" prefWidth="92.0" text="+" />
+            <Button fx:id="quatro" layoutX="7.0" layoutY="316.0" mnemonicParsing="false" onAction="#pressionarQuatro" prefHeight="62.0" prefWidth="92.0" text="4" />
+            <Button fx:id="cinco" layoutX="105.0" layoutY="316.0" mnemonicParsing="false" onAction="#pressionarCinco" prefHeight="62.0" prefWidth="92.0" text="5" />
+            <Button fx:id="seis" layoutX="203.0" layoutY="316.0" mnemonicParsing="false" onAction="#pressionarSeis" prefHeight="62.0" prefWidth="92.0" text="6" />
+            <Button fx:id="subtracao" layoutX="301.0" layoutY="248.0" mnemonicParsing="false" onAction="#pressionarSubtracao" prefHeight="62.0" prefWidth="92.0" text="-" />
+            <Button fx:id="sete" layoutX="7.0" layoutY="248.0" mnemonicParsing="false" onAction="#pressionarSete" prefHeight="62.0" prefWidth="92.0" text="7" />
+            <Button fx:id="oito" layoutX="105.0" layoutY="248.0" mnemonicParsing="false" onAction="#pressionarOito" prefHeight="62.0" prefWidth="92.0" text="8" />
+            <Button fx:id="nove" layoutX="203.0" layoutY="248.0" mnemonicParsing="false" onAction="#pressionarNove" prefHeight="62.0" prefWidth="92.0" text="9" />
+            <Button fx:id="multiplicacao" layoutX="301.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarMultiplicacao" prefHeight="62.0" prefWidth="92.0" text="x" />
+            <Button fx:id="apagarTudo" layoutX="7.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarApagarTudo" prefHeight="62.0" prefWidth="92.0" text="C" />
+            <Button fx:id="apagar" layoutX="105.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarApagar" prefHeight="62.0" prefWidth="92.0" text="&lt;-" />
+            <Button fx:id="porcentagem" layoutX="7.0" layoutY="452.0" mnemonicParsing="false" onAction="#pressionarPorcentagem" prefHeight="62.0" prefWidth="92.0" text="\%" />
+            <Button fx:id="divisao" layoutX="203.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarDivisao" prefHeight="62.0" prefWidth="92.0" text="÷" />
             <TextField fx:id="entrada" alignment="CENTER_RIGHT" editable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="174.0" prefWidth="400.0" styleClass="" text="0">
                <font>
                   <Font size="30.0" />

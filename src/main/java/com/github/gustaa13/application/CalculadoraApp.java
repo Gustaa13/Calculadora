@@ -24,7 +24,7 @@ public class CalculadoraApp extends Application {
         palco.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         cena.setRoot(loadFXML(fxml));
     }
 
@@ -36,5 +36,4 @@ public class CalculadoraApp extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }

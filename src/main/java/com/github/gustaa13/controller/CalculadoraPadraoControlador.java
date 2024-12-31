@@ -1,5 +1,8 @@
 package com.github.gustaa13.controller;
 
+import java.io.IOException;
+
+import com.github.gustaa13.application.CalculadoraApp;
 import com.github.gustaa13.model.InterpretadorCalculadora;
 import com.github.gustaa13.util.GerenciadorDeTecla;
 import com.github.gustaa13.util.inputHandlers.ExpressoesPadroes;
@@ -202,6 +205,11 @@ public class CalculadoraPadraoControlador {
     @FXML
     private void pressionarPorcentagem(){
         aplicarTecla(porcentagem.getText());
+    }
+
+    @FXML
+    private void trocarParaCalculadoraCientifica() throws IOException{
+        CalculadoraApp.setRoot("/com/github/gustaa13/calculadora-cientifica");
     }
 
     @FXML
