@@ -3,7 +3,7 @@ package com.github.gustaa13.controller;
 import java.io.IOException;
 
 import com.github.gustaa13.application.CalculadoraApp;
-import com.github.gustaa13.model.InterpretadorCalculadora;
+import com.github.gustaa13.model.interpreters.InterpretadorPadrao;
 import com.github.gustaa13.util.GerenciadorDeTecla;
 import com.github.gustaa13.util.inputHandlers.ExpressoesPadroes;
 import com.github.gustaa13.util.FomatadorDeExpressao;
@@ -185,7 +185,7 @@ public class CalculadoraPadraoControlador {
     @FXML
     private void pressionarIgual(){
         if(!calculadoraPadrao.expressaoExiste()) return;
-        InterpretadorCalculadora interpretador = new InterpretadorCalculadora(calculadoraPadrao.getExpressao().toString());
+        InterpretadorPadrao interpretador = new InterpretadorPadrao(calculadoraPadrao.getExpressao().toString());
 
         if(calculadoraPadrao.concluirExpressao()){
             interpretador.calcularResultadoTotal();

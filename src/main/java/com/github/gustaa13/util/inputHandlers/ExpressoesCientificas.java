@@ -1,5 +1,9 @@
 package com.github.gustaa13.util.inputHandlers;
 
+import com.github.gustaa13.util.AlertaGeral;
+
+import javafx.scene.control.Alert.AlertType;
+
 public class ExpressoesCientificas extends TratadorDeEntradas {
     
     public ExpressoesCientificas(
@@ -20,5 +24,57 @@ public class ExpressoesCientificas extends TratadorDeEntradas {
 
     }
 
-    public void adicionarCaracterNaExpressao(String caractere){}
+    public void adicionarCaracterNaExpressao(String caractere){
+        if(getExpressao().length() >= 100){
+            AlertaGeral alertaDeCaracteres = new AlertaGeral(AlertType.INFORMATION, "Alerta de caraceteres", "Não é possível inserir mais de 100 caracteres.", 1.5);
+
+            alertaDeCaracteres.janelaDeAlerta();
+
+            return;
+        }
+
+        if(caractere.matches("[0-9]")){ 
+            if(getContadorDeAlgarismos() >= 15){
+                /*AlertaGeral alertaDeAlgarismos = new AlertaGeral(AlertType.INFORMATION, "Alerta de dígitos", "Não é possível inserir mais de 15 dígitos.", 1.5);
+    
+                alertaDeAlgarismos.janelaDeAlerta();*/
+            }else if(getExpressao().length() > 0 && (getExpressao().charAt(getExpressao().length() - 1) == '%')){
+                getExpressao().append("x" + caractere);
+                setPermitirPorcentagem(true);
+                setPermitirVirgula(true);
+                setContadorDeAlgarismos(getContadorDeAlgarismos() + 1);
+            }else if(numeroAnteriorIgualaZero() && caractere.equals("0") && getContadorDeAlgarismos() > 0 && getPermitirVirgula()){
+                return;
+            }else if(caractere.equals("0") && !expressaoExiste()){
+                return;
+            }
+            else{
+                getExpressao().append(caractere);
+                setContadorDeAlgarismos(getContadorDeAlgarismos() + 1);
+            }
+        }else if(caractere.equals(",")){
+            if(getPermitirVirgula() && getContadorDeAlgarismos() == 0){
+                getExpressao().append("0,");
+                setPermitirVirgula(false);
+                setContadorDeAlgarismos(getContadorDeAlgarismos() + 1);
+            }else if(getPermitirVirgula() && getContadorDeAlgarismos() < 15){
+                getExpressao().append(caractere);
+                setPermitirVirgula(false);
+            }
+        }else if(caractere.matches("[+\\-x÷]")){ 
+            if(podeAdicionarCaracter() && !erroDivisaoPorZero()){    
+                getExpressao().append(caractere);
+                setPermitirVirgula(true);
+                setContadorDeAlgarismos(0);
+                setPermitirPorcentagem(true);
+            }
+        }else if(caractere.equals("%")){
+            if(getExpressao().length() > 0 && getPermitirPorcentagem() && getContadorDeAlgarismos() > 0){
+                getExpressao().append(caractere);
+                setPermitirVirgula(true);
+                setContadorDeAlgarismos(0);
+                setPermitirPorcentagem(false);
+            }
+        }
+    }
 }

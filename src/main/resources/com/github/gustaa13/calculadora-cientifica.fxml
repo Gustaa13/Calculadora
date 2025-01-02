@@ -55,7 +55,7 @@
             <Button fx:id="exponenciacao" layoutX="105.0" layoutY="237.0" mnemonicParsing="false" onAction="#pressionarExponenciacao" prefHeight="51.0" prefWidth="92.0" text="^ " />
             <Button fx:id="radiciacao" layoutX="7.0" layoutY="237.0" mnemonicParsing="false" onAction="#pressionarRadiciacao" prefHeight="51.0" prefWidth="92.0" text="√" />
             <Button fx:id="parenteses" layoutX="203.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarParenteses" prefHeight="51.0" prefWidth="92.0" text="( )" />
-            <Button fx:id="modulo" layoutX="301.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarModulo" prefHeight="51.0" prefWidth="92.0" text="|x|" />
+            <Button fx:id="valorAbsoluto" layoutX="301.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarValorAbsoluto" prefHeight="51.0" prefWidth="92.0" text="|x|" />
          </children>
     </AnchorPane>
   </children>

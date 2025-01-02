@@ -1,31 +1,14 @@
-package com.github.gustaa13.model;
+package com.github.gustaa13.model.interpreters;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
-public class InterpretadorCalculadora {
-    private String expressao;
-    private String resultado;
+import com.github.gustaa13.model.Calculadora;
 
-    public InterpretadorCalculadora(String expressao) {
-        this.expressao = expressao;
-    }
-
-    public String getExpressao() {
-        return expressao;
-    }
-
-    public void setExpressao(String expressao) {
-        this.expressao = expressao;
-    }
-
-    public String getResultado() {
-        return resultado;
-    }
-
-    public void setResultado(String resultado) {
-        this.resultado = resultado;
+public class InterpretadorCientifico extends InterpretadorCalculadora{
+    
+    public InterpretadorCientifico(String expressao){
+        super(expressao);
     }
 
     public void calcularResultadoTotal(){
@@ -113,33 +96,6 @@ public class InterpretadorCalculadora {
             partes.set(0, partes.get(0).replace(".", ","));
         }
         
-        resultado = partes.get(0);
-    }
-
-    private List<String> separadorDeExpressao(){
-        List<String> partes = new ArrayList<>();
-        StringBuilder numero = new StringBuilder();
-
-        for(char c : expressao.toCharArray()){
-            if(Character.isDigit(c)){
-                numero.append(c);
-            }else if(c == ','){
-                numero.append(".");
-            }else if("+-x÷%".indexOf(c) != -1){
-                if(numero.length() > 0){
-                    partes.add(numero.toString());
-                    numero.setLength(0);
-                }
-                partes.add(String.valueOf(c));
-            }
-        }
-
-        if(numero.length() > 0){
-            partes.add(numero.toString());
-        }else{
-            partes.add("0");
-        }
-
-        return partes;
+        setResultado(partes.get(0));
     }
 }

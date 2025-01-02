@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class FomatadorDeExpressao {
     
     public static String formatar(String entrada){
-        Pattern padrao = Pattern.compile("\\d+(?:,\\d{1,26})?");
+        Pattern padrao = Pattern.compile("\\d+(?:,\\d{1,20})?");
         Matcher correspondencia = padrao.matcher(entrada);
 
         DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
