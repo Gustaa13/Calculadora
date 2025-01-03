@@ -75,6 +75,23 @@ public class ExpressoesCientificas extends TratadorDeEntradas {
                 setContadorDeAlgarismos(0);
                 setPermitirPorcentagem(false);
             }
+        }else if(caractere.equals("( )")){
+            if(getContadorDeParentesesAbertos() == 0 && getContadorDeAlgarismos() == 0){
+                getExpressao().append("(");
+                setContadorDeParentesesAbertos(getContadorDeParentesesAbertos() + 1);
+            }else if(String.valueOf(getExpressao().charAt(getExpressao().length() - 1)).matches("[0-9]") && getContadorDeParentesesAbertos() > 0){
+                getExpressao().append(")");
+                setContadorDeParentesesFechados(getContadorDeParentesesFechados() + 1);
+            }else if(String.valueOf(getExpressao().charAt(getExpressao().length() - 1)).matches("[+\\\\-x÷]")){
+                getExpressao().append("(");
+                setContadorDeParentesesAbertos(getContadorDeParentesesAbertos() + 1);
+            }else if(getExpressao().charAt(getExpressao().length() - 1) == '('){
+                getExpressao().append("(");
+                setContadorDeParentesesAbertos(getContadorDeParentesesAbertos() + 1);
+            }else if(getExpressao().charAt(getExpressao().length() - 1) == ')' && (getContadorDeParentesesAbertos() > getContadorDeParentesesFechados())){
+                getExpressao().append(")");
+                setContadorDeParentesesFechados(getContadorDeParentesesFechados() + 1);
+            }
         }
     }
 }

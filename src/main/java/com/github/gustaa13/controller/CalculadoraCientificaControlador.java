@@ -110,12 +110,19 @@ public class CalculadoraCientificaControlador {
 
     @FXML
     void pressionarApagar(){
+        calculadoraCientifica.apagarCaractereDaExpresssao();
+        entrada.setText(calculadoraCientifica.getExpressao().length() > 0 ? FomatadorDeExpressao.formatar(calculadoraCientifica.getExpressao().toString()) : "0");     
 
+        entrada.requestFocus();
+        entrada.positionCaret(entrada.getLength());
     }
 
     @FXML
     void pressionarApagarTudo(){
-
+        calculadoraCientifica.apagarExpressao();
+        entrada.setText("0");
+        entrada.requestFocus();
+        entrada.positionCaret(entrada.getLength());
     }
 
     @FXML
@@ -180,7 +187,7 @@ public class CalculadoraCientificaControlador {
 
     @FXML
     void pressionarParenteses(){
-
+        aplicarTecla(parenteses.getText());
     }
 
     @FXML

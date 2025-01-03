@@ -11,6 +11,8 @@ public abstract class TratadorDeEntradas{
     private boolean permitirVirgula; 
     private boolean permitirPorcentagem;
     private StringBuilder expressao;
+    private Integer contadorDeParentesesAbertos = 0;
+    private Integer contadorDeParentesesFechados = 0;
 
     public static String getOperadores() {
         return OPERADORES;
@@ -23,6 +25,22 @@ public abstract class TratadorDeEntradas{
     public void setContadorDeAlgarismos(Integer contadorDeAlgarismos){
         if(contadorDeAlgarismos > 15 || contadorDeAlgarismos < 0) return;
         this.contadorDeAlgarismos = contadorDeAlgarismos;
+    }
+
+    public Integer getContadorDeParentesesAbertos(){
+        return contadorDeParentesesAbertos;
+    }
+
+    public void setContadorDeParentesesAbertos(Integer contadorDeParentesesAbertos){
+        this.contadorDeParentesesAbertos = contadorDeParentesesAbertos;
+    }
+
+    public Integer getContadorDeParentesesFechados(){
+        return contadorDeParentesesFechados;
+    }
+
+    public void setContadorDeParentesesFechados(Integer contadorDeParentesesFechados){
+        this.contadorDeParentesesFechados = contadorDeParentesesFechados;
     }
 
     public boolean getPermitirVirgula() {
@@ -68,14 +86,14 @@ public abstract class TratadorDeEntradas{
     public abstract void adicionarCaracterNaExpressao(String caractere);
 
     protected boolean podeAdicionarCaracter(){
-        return expressao.length() > 0 && !(OPERADORES + ",").contains(String.valueOf(expressao.charAt(expressao.length() - 1)));
+        return expressao.length() > 0 && !(OPERADORES + "," + "(").contains(String.valueOf(expressao.charAt(expressao.length() - 1)));
     }
 
     protected int PosicaoDoUltimoNumero(){
         int index = 0;
 
         for(int i = expressao.length() - 1; i > 0; i--){
-            if(String.valueOf(expressao.charAt(i)).matches("[+\\-x÷]")){
+            if(String.valueOf(expressao.charAt(i)).matches("[+\\-x÷(]")){
                 index = i + 1;
                 i = -1;
             }
@@ -112,6 +130,8 @@ public abstract class TratadorDeEntradas{
         if(erroDivisaoPorZero()) return false;
 
         contadorDeAlgarismos = 0;
+        contadorDeParentesesAbertos = 0;
+        contadorDeParentesesFechados = 0;
         permitirPorcentagem = true;
         permitirVirgula = true;
         expressao.setLength(0);
@@ -121,6 +141,8 @@ public abstract class TratadorDeEntradas{
 
     public void apagarExpressao(){
         contadorDeAlgarismos = 0;
+        contadorDeParentesesAbertos = 0;
+        contadorDeParentesesFechados = 0;
         permitirVirgula = true;
         permitirPorcentagem = true;
         expressao.setLength(0);
@@ -131,6 +153,8 @@ public abstract class TratadorDeEntradas{
         if(Character.isDigit(expressao.charAt(expressao.length() - 1)) && contadorDeAlgarismos > 0) contadorDeAlgarismos = expressao.length() - 1 - PosicaoDoUltimoNumero();
         if(expressao.charAt(expressao.length() - 1) == ',') permitirVirgula = true;
         if(expressao.charAt(expressao.length() - 1) == '%') permitirPorcentagem = true;
+        if(expressao.charAt(expressao.length() - 1) == '(') contadorDeParentesesAbertos--;
+        if(expressao.charAt(expressao.length() - 1) == ')') contadorDeParentesesFechados--;
 
         expressao.deleteCharAt(expressao.length() - 1);
     }
