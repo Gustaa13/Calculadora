@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.github.gustaa13.model.Calculadora;
+import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 
 public class InterpretadorCientifico extends InterpretadorCalculadora{
     
@@ -57,6 +58,8 @@ public class InterpretadorCientifico extends InterpretadorCalculadora{
                 BigDecimal num1 = new BigDecimal(parte.get(index - 1));
     
                 BigDecimal num2 = new BigDecimal(parte.get(index + 1));
+
+                if(num2.compareTo(BigDecimal.ZERO) == 0) throw new DivisaoPorZeroException();
     
                 String valor = Calculadora.divisao(num1, num2).toString();
     
@@ -82,10 +85,15 @@ public class InterpretadorCientifico extends InterpretadorCalculadora{
                 parte.remove(index);         
             }
     
-            while(partes.contains("-")){
+            while(parte.contains("-")){
     
                 index = parte.indexOf("-");
-    
+
+                if(index - 1 < 0){
+                    parte.add(0, "0");
+                    index = parte.indexOf("-");
+                }
+
                 BigDecimal num1 = new BigDecimal(parte.get(index - 1));
     
                 BigDecimal num2 = new BigDecimal(parte.get(index + 1));
@@ -139,6 +147,8 @@ public class InterpretadorCientifico extends InterpretadorCalculadora{
             BigDecimal num1 = new BigDecimal(partes.get(index - 1));
 
             BigDecimal num2 = new BigDecimal(partes.get(index + 1));
+
+            if(num2.compareTo(BigDecimal.ZERO) == 0) throw new DivisaoPorZeroException();
 
             String valor = Calculadora.divisao(num1, num2).toString();
 

@@ -1,8 +1,6 @@
 package com.github.gustaa13.util.inputHandlers;
 
-import com.github.gustaa13.util.AlertaGeral;
-
-import javafx.scene.control.Alert.AlertType;
+import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 
 public abstract class TratadorDeEntradas{
 
@@ -63,6 +61,15 @@ public abstract class TratadorDeEntradas{
         return expressao;
     }
 
+    public StringBuilder getExpressaoFinal() {
+        if(contadorDeParentesesAbertos > contadorDeParentesesFechados){
+            for(int i = 0; i < contadorDeParentesesAbertos - contadorDeParentesesFechados; i++){
+                expressao.append(")");
+            }
+        }
+        return expressao;
+    }
+
     public void setExpressao(StringBuilder expressao) {
         this.expressao = expressao;
     }
@@ -89,10 +96,10 @@ public abstract class TratadorDeEntradas{
         return expressao.length() > 0 && !(OPERADORES + "," + "(").contains(String.valueOf(expressao.charAt(expressao.length() - 1)));
     }
 
-    protected int PosicaoDoUltimoNumero(){
+    protected int posicaoDoUltimoNumero(){
         int index = 0;
 
-        for(int i = expressao.length() - 1; i > 0; i--){
+        for(int i = expressao.length() - 1; i >= 0; i--){
             if(String.valueOf(expressao.charAt(i)).matches("[+\\-x÷(]")){
                 index = i + 1;
                 i = -1;
@@ -102,20 +109,14 @@ public abstract class TratadorDeEntradas{
         return index;
     }
 
-    protected boolean erroDivisaoPorZero(){
-        if(numeroAnteriorIgualaZero() && expressao.charAt(PosicaoDoUltimoNumero() - 1) == '÷'){
-            AlertaGeral erroDivisaoPorZero = new AlertaGeral(AlertType.ERROR, "Erro de Divisão por Zero", "Não é possível dividir por zero.", 2.0);
-
-            erroDivisaoPorZero.janelaDeAlerta();
-
-            return true;
-        }else{
-            return false;
+    protected void erroDivisaoPorZero(){
+        if(numeroAnteriorIgualaZero() && expressao.charAt(posicaoDoUltimoNumero() - 1) == '÷'){
+            throw new DivisaoPorZeroException();
         }
     }
 
     protected boolean numeroAnteriorIgualaZero(){
-        String ultimoNumero = expressao.substring(PosicaoDoUltimoNumero());
+        String ultimoNumero = expressao.substring(posicaoDoUltimoNumero());
 
         if(!ultimoNumero.matches(".*[1-9].*")) return true;
         else return false;
@@ -126,17 +127,18 @@ public abstract class TratadorDeEntradas{
         else return false;
     }
 
-    public boolean concluirExpressao(){
-        if(erroDivisaoPorZero()) return false;
-
-        contadorDeAlgarismos = 0;
-        contadorDeParentesesAbertos = 0;
-        contadorDeParentesesFechados = 0;
-        permitirPorcentagem = true;
-        permitirVirgula = true;
-        expressao.setLength(0);
-
-        return true;
+    public void concluirExpressao(){
+        try {
+            erroDivisaoPorZero();
+            contadorDeAlgarismos = 0;
+            contadorDeParentesesAbertos = 0;
+            contadorDeParentesesFechados = 0;
+            permitirPorcentagem = true;
+            permitirVirgula = true;
+            expressao.setLength(0);
+        } catch (DivisaoPorZeroException e){
+            throw new DivisaoPorZeroException();
+        }
     }
 
     public void apagarExpressao(){
@@ -150,7 +152,7 @@ public abstract class TratadorDeEntradas{
 
     public void apagarCaractereDaExpresssao(){
         if(expressao.length() <= 0) return; 
-        if(Character.isDigit(expressao.charAt(expressao.length() - 1)) && contadorDeAlgarismos > 0) contadorDeAlgarismos = expressao.length() - 1 - PosicaoDoUltimoNumero();
+        if(Character.isDigit(expressao.charAt(expressao.length() - 1)) && contadorDeAlgarismos > 0) contadorDeAlgarismos = expressao.length() - 1 - posicaoDoUltimoNumero();
         if(expressao.charAt(expressao.length() - 1) == ',') permitirVirgula = true;
         if(expressao.charAt(expressao.length() - 1) == '%') permitirPorcentagem = true;
         if(expressao.charAt(expressao.length() - 1) == '(') contadorDeParentesesAbertos--;

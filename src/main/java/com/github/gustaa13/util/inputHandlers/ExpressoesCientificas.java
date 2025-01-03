@@ -1,6 +1,7 @@
 package com.github.gustaa13.util.inputHandlers;
 
 import com.github.gustaa13.util.AlertaGeral;
+import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 
 import javafx.scene.control.Alert.AlertType;
 
@@ -62,12 +63,19 @@ public class ExpressoesCientificas extends TratadorDeEntradas {
                 setPermitirVirgula(false);
             }
         }else if(caractere.matches("[+\\-x÷]")){ 
-            if(podeAdicionarCaracter() && !erroDivisaoPorZero()){    
-                getExpressao().append(caractere);
-                setPermitirVirgula(true);
-                setContadorDeAlgarismos(0);
-                setPermitirPorcentagem(true);
+
+            try {
+                if(podeAdicionarCaracter()){  
+                    erroDivisaoPorZero();  
+                    getExpressao().append(caractere);
+                    setPermitirVirgula(true);
+                    setContadorDeAlgarismos(0);
+                    setPermitirPorcentagem(true);
+                }
+            } catch (DivisaoPorZeroException e) {
+                throw new DivisaoPorZeroException();
             }
+            
         }else if(caractere.equals("%")){
             if(getExpressao().length() > 0 && getPermitirPorcentagem() && getContadorDeAlgarismos() > 0){
                 getExpressao().append(caractere);
@@ -91,6 +99,14 @@ public class ExpressoesCientificas extends TratadorDeEntradas {
             }else if(getExpressao().charAt(getExpressao().length() - 1) == ')' && (getContadorDeParentesesAbertos() > getContadorDeParentesesFechados())){
                 getExpressao().append(")");
                 setContadorDeParentesesFechados(getContadorDeParentesesFechados() + 1);
+            }
+        }else if(caractere.equals("+/-") && getContadorDeAlgarismos() > 0){
+            if(posicaoDoUltimoNumero() - 2 >= 0 && getExpressao().substring(posicaoDoUltimoNumero() - 2, posicaoDoUltimoNumero()).equals("(-")){
+                getExpressao().delete(posicaoDoUltimoNumero() - 2, posicaoDoUltimoNumero());
+                getExpressao().deleteCharAt(getExpressao().length() - 1);
+            }else{
+                getExpressao().insert(posicaoDoUltimoNumero(), "(-");
+                getExpressao().append(")");
             }
         }
     }

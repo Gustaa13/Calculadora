@@ -1,6 +1,7 @@
 package com.github.gustaa13.util.inputHandlers;
 
 import com.github.gustaa13.util.AlertaGeral;
+import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 
 import javafx.scene.control.Alert.AlertType;
 
@@ -62,12 +63,19 @@ public class ExpressoesPadroes extends TratadorDeEntradas {
                 setPermitirVirgula(false);
             }
         }else if(caractere.matches("[+\\-x÷]")){ 
-            if(podeAdicionarCaracter() && !erroDivisaoPorZero()){    
-                getExpressao().append(caractere);
-                setPermitirVirgula(true);
-                setContadorDeAlgarismos(0);
-                setPermitirPorcentagem(true);
+
+            try {
+                if(podeAdicionarCaracter()){  
+                    erroDivisaoPorZero();  
+                    getExpressao().append(caractere);
+                    setPermitirVirgula(true);
+                    setContadorDeAlgarismos(0);
+                    setPermitirPorcentagem(true);
+                }
+            } catch (DivisaoPorZeroException e) {
+                throw new DivisaoPorZeroException();
             }
+
         }else if(caractere.equals("%")){
             if(getExpressao().length() > 0 && getPermitirPorcentagem() && getContadorDeAlgarismos() > 0){
                 getExpressao().append(caractere);

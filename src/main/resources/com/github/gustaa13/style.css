@@ -2,16 +2,17 @@
     -fx-text-fill: rgb(85, 85, 85);
     -fx-font-size: 28px;
     -fx-background-color: white;
+    -fx-padding: 12;
 }
 
 .button {
-    
+    -fx-border-color:rgb(126, 126, 126);
 }
 
 .button:focused {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
-    -fx-border-color: transparent;
+    -fx-border-color: rgb(109, 109, 109);
 }
 
 .text-field:focused {
@@ -19,5 +20,7 @@
     -fx-faint-focus-color: transparent;
     -fx-border-color: transparent;
     -fx-cursor: text;
+    -fx-highlight-fill: transparent; 
+    -fx-highlight-text-fill: -fx-text-fill;
 }
 

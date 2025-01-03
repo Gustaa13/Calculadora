@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.github.gustaa13.application.CalculadoraApp;
 import com.github.gustaa13.model.interpreters.InterpretadorPadrao;
 import com.github.gustaa13.util.GerenciadorDeTecla;
+import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 import com.github.gustaa13.util.inputHandlers.ExpressoesPadroes;
 import com.github.gustaa13.util.FomatadorDeExpressao;
 
@@ -83,8 +84,14 @@ public class CalculadoraPadraoControlador {
 
     public void aplicarTecla(String caracter){
 
-        calculadoraPadrao.adicionarCaracterNaExpressao(caracter);
-
+        try {
+            calculadoraPadrao.adicionarCaracterNaExpressao(caracter);
+        } catch (DivisaoPorZeroException e) {
+            entrada.setText("Não é possível dividir por zero");
+            entrada.positionCaret(entrada.getLength());
+            return;
+        }
+        
         if(!calculadoraPadrao.expressaoExiste()){
             entrada.setText("0");
         }else{
@@ -187,14 +194,17 @@ public class CalculadoraPadraoControlador {
         if(!calculadoraPadrao.expressaoExiste()) return;
         InterpretadorPadrao interpretador = new InterpretadorPadrao(calculadoraPadrao.getExpressao().toString());
 
-        if(calculadoraPadrao.concluirExpressao()){
+        try {
+            calculadoraPadrao.concluirExpressao();
             interpretador.calcularResultadoTotal();
-    
+
             entrada.setText(FomatadorDeExpressao.formatar(interpretador.getResultado()));
-            
-            entrada.requestFocus();
-            entrada.positionCaret(0); 
-        } 
+        } catch (DivisaoPorZeroException e) {
+            entrada.setText("Não é possível dividir por zero");
+            entrada.positionCaret(entrada.getLength());
+        }
+
+        entrada.requestFocus();
     }
 
     @FXML

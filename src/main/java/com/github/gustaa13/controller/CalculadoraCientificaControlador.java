@@ -6,6 +6,7 @@ import com.github.gustaa13.application.CalculadoraApp;
 import com.github.gustaa13.model.interpreters.InterpretadorCientifico;
 import com.github.gustaa13.util.FomatadorDeExpressao;
 import com.github.gustaa13.util.GerenciadorDeTecla;
+import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 import com.github.gustaa13.util.inputHandlers.ExpressoesCientificas;
 
 import javafx.application.Platform;
@@ -96,8 +97,14 @@ public class CalculadoraCientificaControlador {
 
     public void aplicarTecla(String caracter){
 
-        calculadoraCientifica.adicionarCaracterNaExpressao(caracter);
-
+        try {
+            calculadoraCientifica.adicionarCaracterNaExpressao(caracter);
+        } catch (DivisaoPorZeroException e) {
+            entrada.setText("Não é possível dividir por zero");
+            entrada.positionCaret(entrada.getLength());
+            return;
+        }
+        
         if(!calculadoraCientifica.expressaoExiste()){
             entrada.setText("0");
         }else{
@@ -148,21 +155,24 @@ public class CalculadoraCientificaControlador {
     @FXML
     void pressionarIgual(){
         if(!calculadoraCientifica.expressaoExiste()) return;
-        InterpretadorCientifico interpretador = new InterpretadorCientifico(calculadoraCientifica.getExpressao().toString());
+        InterpretadorCientifico interpretador = new InterpretadorCientifico(calculadoraCientifica.getExpressaoFinal().toString());
 
-        if(calculadoraCientifica.concluirExpressao()){
+        try {
+            calculadoraCientifica.concluirExpressao();
             interpretador.calcularResultadoTotal();
-    
+
             entrada.setText(FomatadorDeExpressao.formatar(interpretador.getResultado()));
-            
-            entrada.requestFocus();
-            entrada.positionCaret(0); 
-        } 
+        } catch (DivisaoPorZeroException e) {
+            entrada.setText("Não é possível dividir por zero");
+            entrada.positionCaret(entrada.getLength());
+        }
+        
+        entrada.requestFocus();
     }
 
     @FXML
     void pressionarMaisOUmenos(){
-
+        aplicarTecla(maisOUmenos.getText());
     }
 
     @FXML
@@ -310,6 +320,9 @@ public class CalculadoraCientificaControlador {
             GerenciadorDeTecla.adicionarEventoAoPressionar(virgula, KeyCode.DECIMAL);
 
             GerenciadorDeTecla.adicionarEventoAoPressionar(porcentagem, KeyCode.DIGIT5, true);
+
+            GerenciadorDeTecla.adicionarEventoAoPressionar(parenteses, KeyCode.DIGIT9, true);
+            GerenciadorDeTecla.adicionarEventoAoPressionar(parenteses, KeyCode.DIGIT0, true);
         });
     }
 }
