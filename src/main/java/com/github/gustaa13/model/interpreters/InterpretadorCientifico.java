@@ -23,6 +23,33 @@ public class InterpretadorCientifico extends InterpretadorCalculadora{
             index2 = parte.lastIndexOf("(");
             parte = parte.subList(index2 + 1, index);
 
+            while(parte.contains("√")){
+                index = parte.indexOf("√");
+
+                BigDecimal num1 = new BigDecimal(parte.get(index + 1));
+
+                String valor = Calculadora.radiciacaoQuadrada(num1).toString();
+
+                parte.set(index, valor);
+
+                parte.remove(index + 1);
+            }
+
+            while(parte.contains("^")){
+                index = parte.indexOf("^");
+
+                Double num1 = Double.valueOf(parte.get(index - 1));
+                
+                Double num2 = Double.valueOf(parte.get(index + 1));
+
+                String valor = Calculadora.exponenciacao(num1, num2).toString();
+
+                parte.set(index - 1, valor);
+
+                parte.remove(index);
+                parte.remove(index);
+            }
+
             while(parte.contains("%")){
                 index = parte.indexOf("%");
     
@@ -111,6 +138,33 @@ public class InterpretadorCientifico extends InterpretadorCalculadora{
         }
         
         while(partes.remove("("));
+
+        while(partes.contains("√")){
+            index = partes.indexOf("√");
+
+            BigDecimal num1 = new BigDecimal(partes.get(index + 1));
+
+            String valor = Calculadora.radiciacaoQuadrada(num1).toString();
+
+            partes.set(index, valor);
+
+            partes.remove(index + 1);
+        }
+
+        while(partes.contains("^")){
+            index = partes.indexOf("^");
+
+            Double num1 = Double.valueOf(partes.get(index - 1));
+            
+            Double num2 = Double.valueOf(partes.get(index + 1));
+
+            String valor = Calculadora.exponenciacao(num1, num2).toString();
+
+            partes.set(index - 1, valor);
+
+            partes.remove(index);
+            partes.remove(index);
+        }
 
         while(partes.contains("%")){
             index = partes.indexOf("%");

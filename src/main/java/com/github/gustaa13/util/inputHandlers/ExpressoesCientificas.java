@@ -108,6 +108,12 @@ public class ExpressoesCientificas extends TratadorDeEntradas {
                 getExpressao().insert(posicaoDoUltimoNumero(), "(-");
                 getExpressao().append(")");
             }
+        }else if(caractere.equals("xʸ") && getContadorDeAlgarismos() > 0){
+            getExpressao().append("^");
+            setPermitirVirgula(true);
+            setContadorDeAlgarismos(0);
+        }else if(caractere.equals("√")){
+            getExpressao().append("√");
         }
     }
 }

@@ -149,7 +149,7 @@ public class CalculadoraCientificaControlador {
 
     @FXML
     void pressionarExponenciacao(){
-
+        aplicarTecla(exponenciacao.getText());
     }
 
     @FXML
@@ -177,7 +177,7 @@ public class CalculadoraCientificaControlador {
 
     @FXML
     void pressionarValorAbsoluto(){
-
+        aplicarTecla(valorAbsoluto.getText());
     }
 
     @FXML

@@ -38,7 +38,7 @@ public abstract class InterpretadorCalculadora {
                 numero.append(c);
             }else if(c == ','){
                 numero.append(".");
-            }else if("+-x÷%()".indexOf(c) != -1 ){
+            }else if("+-x÷%()^√".indexOf(c) != -1 ){
                 if(numero.length() > 0){
                     partes.add(numero.toString());
                     numero.setLength(0);

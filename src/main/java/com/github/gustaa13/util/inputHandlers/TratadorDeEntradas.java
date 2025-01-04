@@ -93,7 +93,7 @@ public abstract class TratadorDeEntradas{
     public abstract void adicionarCaracterNaExpressao(String caractere);
 
     protected boolean podeAdicionarCaracter(){
-        return expressao.length() > 0 && !(OPERADORES + "," + "(").contains(String.valueOf(expressao.charAt(expressao.length() - 1)));
+        return expressao.length() > 0 && !(OPERADORES + "," + "(" + "^" + "√").contains(String.valueOf(expressao.charAt(expressao.length() - 1)));
     }
 
     protected int posicaoDoUltimoNumero(){
