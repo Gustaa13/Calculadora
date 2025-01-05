@@ -100,6 +100,17 @@ public class ExpressoesCientificas extends TratadorDeEntradas {
                 getExpressao().append(")");
                 setContadorDeParentesesFechados(getContadorDeParentesesFechados() + 1);
             }
+        }else if(caractere.equals("|x|")){
+            if(getContadorDeParentesesAbertos() == 0 && getContadorDeAlgarismos() == 0){
+                getExpressao().append("abs(");
+                setContadorDeParentesesAbertos(getContadorDeParentesesAbertos() + 1);
+            }else if(String.valueOf(getExpressao().charAt(getExpressao().length() - 1)).matches("[+\\\\-x÷]")){
+                getExpressao().append("abs(");
+                setContadorDeParentesesAbertos(getContadorDeParentesesAbertos() + 1);
+            }else if(getExpressao().charAt(getExpressao().length() - 1) == '('){
+                getExpressao().append("abs(");
+                setContadorDeParentesesAbertos(getContadorDeParentesesAbertos() + 1);
+            }
         }else if(caractere.equals("+/-") && getContadorDeAlgarismos() > 0){
             if(posicaoDoUltimoNumero() - 2 >= 0 && getExpressao().substring(posicaoDoUltimoNumero() - 2, posicaoDoUltimoNumero()).equals("(-")){
                 getExpressao().delete(posicaoDoUltimoNumero() - 2, posicaoDoUltimoNumero());

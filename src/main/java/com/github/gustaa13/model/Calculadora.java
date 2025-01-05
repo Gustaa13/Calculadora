@@ -34,7 +34,7 @@ public class Calculadora {
         return num1.sqrt(mc);
     }
 
-    public static BigDecimal absoluto(BigDecimal num1){
+    public static BigDecimal valorAbsoluto(BigDecimal num1){
         return num1.abs(mc);
     }
 }

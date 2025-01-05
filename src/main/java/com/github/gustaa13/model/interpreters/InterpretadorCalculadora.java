@@ -30,35 +30,35 @@ public abstract class InterpretadorCalculadora {
     public abstract void calcularResultadoTotal();
 
     protected List<String> separadorDeExpressao(){
-        List<String> partes = new ArrayList<>();
+        List<String> partesDaExpressao = new ArrayList<>();
         StringBuilder numero = new StringBuilder();
 
         for(char c : expressao.toCharArray()){
             if(Character.isDigit(c)){
                 numero.append(c);
             }else if(c == ','){
-                numero.append(".");
-            }else if("+-x÷%()^√".indexOf(c) != -1 ){
+                numero.append("."); 
+            }else if("+-x÷%()^√a".indexOf(c) != -1 ){
                 if(numero.length() > 0){
-                    partes.add(numero.toString());
+                    partesDaExpressao.add(numero.toString());
                     numero.setLength(0);
                 }
-                partes.add(String.valueOf(c));
+                partesDaExpressao.add(String.valueOf(c));
             }
         }
 
         if(numero.length() > 0){
-            partes.add(numero.toString());
+            partesDaExpressao.add(numero.toString());
         }else{
-            if(partes.get(partes.size() - 1).matches("[x÷]")){
-                partes.add("1");
-            }else if(partes.get(partes.size() - 1).matches("[)]")){
-                return partes;
+            if(partesDaExpressao.get(partesDaExpressao.size() - 1).matches("[x÷]")){
+                partesDaExpressao.add("1");
+            }else if(partesDaExpressao.get(partesDaExpressao.size() - 1).matches("[)]")){
+                return partesDaExpressao;
             }else{
-                partes.add("0");
+                partesDaExpressao.add("0");
             }
         }
 
-        return partes;
+        return partesDaExpressao;
     }
 }

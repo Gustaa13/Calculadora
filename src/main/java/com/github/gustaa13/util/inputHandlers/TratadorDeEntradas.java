@@ -155,7 +155,12 @@ public abstract class TratadorDeEntradas{
         if(Character.isDigit(expressao.charAt(expressao.length() - 1)) && contadorDeAlgarismos > 0) contadorDeAlgarismos = expressao.length() - 1 - posicaoDoUltimoNumero();
         if(expressao.charAt(expressao.length() - 1) == ',') permitirVirgula = true;
         if(expressao.charAt(expressao.length() - 1) == '%') permitirPorcentagem = true;
-        if(expressao.charAt(expressao.length() - 1) == '(') contadorDeParentesesAbertos--;
+        if(expressao.charAt(expressao.length() - 1) == '('){
+            contadorDeParentesesAbertos--;
+            if(expressao.charAt(expressao.length() - 2) == 's'){
+                expressao.delete(expressao.length() - 4, expressao.length() - 1);
+            }
+        } 
         if(expressao.charAt(expressao.length() - 1) == ')') contadorDeParentesesFechados--;
 
         expressao.deleteCharAt(expressao.length() - 1);

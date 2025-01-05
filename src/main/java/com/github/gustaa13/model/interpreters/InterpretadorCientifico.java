@@ -13,242 +13,255 @@ public class InterpretadorCientifico extends InterpretadorCalculadora{
     }
 
     public void calcularResultadoTotal(){
-        List<String> partes = separadorDeExpressao();
-        int index;
-        int index2;
+        List<String> partesDaExpressao = separadorDeExpressao();
+        int posicaoFechamentoDeParenteses;
+        int posicaoAberturaDeParenteses;
+        int posicaoOperador;
 
-        while(partes.contains(")")){
-            index = partes.indexOf(")");
-            List<String> parte = partes.subList(0, index);
-            index2 = parte.lastIndexOf("(");
-            parte = parte.subList(index2 + 1, index);
+        while(partesDaExpressao.contains(")")){
+            posicaoFechamentoDeParenteses = partesDaExpressao.indexOf(")");
+            List<String> parteDosParenteses = partesDaExpressao.subList(0, posicaoFechamentoDeParenteses);
+            posicaoAberturaDeParenteses = parteDosParenteses.lastIndexOf("(");
+            parteDosParenteses = parteDosParenteses.subList(posicaoAberturaDeParenteses + 1, posicaoFechamentoDeParenteses);
 
-            while(parte.contains("√")){
-                index = parte.indexOf("√");
+            while(parteDosParenteses.contains("√")){
+                posicaoOperador = parteDosParenteses.indexOf("√");
 
-                BigDecimal num1 = new BigDecimal(parte.get(index + 1));
+                BigDecimal num1 = new BigDecimal(parteDosParenteses.get(posicaoOperador + 1));
 
                 String valor = Calculadora.radiciacaoQuadrada(num1).toString();
 
-                parte.set(index, valor);
+                parteDosParenteses.set(posicaoOperador, valor);
 
-                parte.remove(index + 1);
+                parteDosParenteses.remove(posicaoOperador + 1);
             }
 
-            while(parte.contains("^")){
-                index = parte.indexOf("^");
+            while(parteDosParenteses.contains("^")){
+                posicaoOperador = parteDosParenteses.indexOf("^");
 
-                Double num1 = Double.valueOf(parte.get(index - 1));
+                Double num1 = Double.valueOf(parteDosParenteses.get(posicaoOperador - 1));
                 
-                Double num2 = Double.valueOf(parte.get(index + 1));
+                Double num2 = Double.valueOf(parteDosParenteses.get(posicaoOperador + 1));
 
                 String valor = Calculadora.exponenciacao(num1, num2).toString();
 
-                parte.set(index - 1, valor);
+                parteDosParenteses.set(posicaoOperador - 1, valor);
 
-                parte.remove(index);
-                parte.remove(index);
+                parteDosParenteses.remove(posicaoOperador);
+                parteDosParenteses.remove(posicaoOperador);
             }
 
-            while(parte.contains("%")){
-                index = parte.indexOf("%");
+            while(parteDosParenteses.contains("%")){
+                posicaoOperador = parteDosParenteses.indexOf("%");
     
-                BigDecimal num1 = new BigDecimal(parte.get(index - 1));
+                BigDecimal num1 = new BigDecimal(parteDosParenteses.get(posicaoOperador - 1));
     
                 String valor = Calculadora.porcentagem(num1).toString();
     
-                parte.set(index - 1, valor);
+                parteDosParenteses.set(posicaoOperador - 1, valor);
     
-                parte.remove(index);
+                parteDosParenteses.remove(posicaoOperador);
             }
     
-            while(parte.contains("x")){
+            while(parteDosParenteses.contains("x")){
     
-                index = parte.indexOf("x");
+                posicaoOperador = parteDosParenteses.indexOf("x");
     
-                BigDecimal num1 = new BigDecimal(parte.get(index - 1));
+                BigDecimal num1 = new BigDecimal(parteDosParenteses.get(posicaoOperador - 1));
     
-                BigDecimal num2 = new BigDecimal(parte.get(index + 1));
+                BigDecimal num2 = new BigDecimal(parteDosParenteses.get(posicaoOperador + 1));
     
                 String valor = Calculadora.multiplicacao(num1, num2).toString();
     
-                parte.set(index - 1, valor);
+                parteDosParenteses.set(posicaoOperador - 1, valor);
                 
-                parte.remove(index);
-                parte.remove(index);
+                parteDosParenteses.remove(posicaoOperador);
+                parteDosParenteses.remove(posicaoOperador);
             }
     
-            while(parte.contains("÷")){
+            while(parteDosParenteses.contains("÷")){
     
-                index = parte.indexOf("÷");
+                posicaoOperador = parteDosParenteses.indexOf("÷");
     
-                BigDecimal num1 = new BigDecimal(parte.get(index - 1));
+                BigDecimal num1 = new BigDecimal(parteDosParenteses.get(posicaoOperador - 1));
     
-                BigDecimal num2 = new BigDecimal(parte.get(index + 1));
+                BigDecimal num2 = new BigDecimal(parteDosParenteses.get(posicaoOperador + 1));
 
                 if(num2.compareTo(BigDecimal.ZERO) == 0) throw new DivisaoPorZeroException();
     
                 String valor = Calculadora.divisao(num1, num2).toString();
     
-                parte.set(index - 1, valor);
+                parteDosParenteses.set(posicaoOperador - 1, valor);
                 
-                parte.remove(index);
-                parte.remove(index);       
+                parteDosParenteses.remove(posicaoOperador);
+                parteDosParenteses.remove(posicaoOperador);       
             }
     
-            while(parte.contains("+")){
+            while(parteDosParenteses.contains("+")){
     
-                index = parte.indexOf("+");
+                posicaoOperador = parteDosParenteses.indexOf("+");
     
-                BigDecimal num1 = new BigDecimal(parte.get(index - 1));
+                BigDecimal num1 = new BigDecimal(parteDosParenteses.get(posicaoOperador - 1));
     
-                BigDecimal num2 = new BigDecimal(parte.get(index + 1));
+                BigDecimal num2 = new BigDecimal(parteDosParenteses.get(posicaoOperador + 1));
     
                 String valor = Calculadora.soma(num1, num2).toString();
     
-                parte.set(index - 1, valor);
+                parteDosParenteses.set(posicaoOperador - 1, valor);
                 
-                parte.remove(index);
-                parte.remove(index);         
+                parteDosParenteses.remove(posicaoOperador);
+                parteDosParenteses.remove(posicaoOperador);         
             }
     
-            while(parte.contains("-")){
+            while(parteDosParenteses.contains("-")){
     
-                index = parte.indexOf("-");
+                posicaoOperador = parteDosParenteses.indexOf("-");
 
-                if(index - 1 < 0){
-                    parte.add(0, "0");
-                    index = parte.indexOf("-");
+                if(posicaoOperador - 1 < 0){
+                    parteDosParenteses.add(0, "0");
+                    posicaoOperador = parteDosParenteses.indexOf("-");
                 }
 
-                BigDecimal num1 = new BigDecimal(parte.get(index - 1));
+                BigDecimal num1 = new BigDecimal(parteDosParenteses.get(posicaoOperador - 1));
     
-                BigDecimal num2 = new BigDecimal(parte.get(index + 1));
+                BigDecimal num2 = new BigDecimal(parteDosParenteses.get(posicaoOperador + 1));
     
                 String valor = Calculadora.subtracao(num1, num2).toString();
     
-                parte.set(index - 1, valor);
+                parteDosParenteses.set(posicaoOperador - 1, valor);
                 
-                parte.remove(index);
-                parte.remove(index);       
+                parteDosParenteses.remove(posicaoOperador);
+                parteDosParenteses.remove(posicaoOperador);       
             }
 
-            partes.remove(index2);
-            partes.remove(index2 + 1);
+            if(posicaoAberturaDeParenteses > 0 && partesDaExpressao.get(posicaoAberturaDeParenteses - 1).equals("a")){
+
+                BigDecimal num1 = new BigDecimal(partesDaExpressao.get(posicaoAberturaDeParenteses + 1));
+
+                String valor = Calculadora.valorAbsoluto(num1).toString();
+
+                partesDaExpressao.set(posicaoAberturaDeParenteses + 1, valor);
+                partesDaExpressao.remove(posicaoAberturaDeParenteses - 1);
+                partesDaExpressao.remove(posicaoAberturaDeParenteses - 1);
+                partesDaExpressao.remove(posicaoAberturaDeParenteses);
+            }else{
+                partesDaExpressao.remove(posicaoAberturaDeParenteses);
+                partesDaExpressao.remove(posicaoAberturaDeParenteses + 1);
+            }
         }
         
-        while(partes.remove("("));
+        while(partesDaExpressao.remove("("));
 
-        while(partes.contains("√")){
-            index = partes.indexOf("√");
+        while(partesDaExpressao.contains("√")){
+            posicaoOperador = partesDaExpressao.indexOf("√");
 
-            BigDecimal num1 = new BigDecimal(partes.get(index + 1));
+            BigDecimal num1 = new BigDecimal(partesDaExpressao.get(posicaoOperador + 1));
 
             String valor = Calculadora.radiciacaoQuadrada(num1).toString();
 
-            partes.set(index, valor);
+            partesDaExpressao.set(posicaoOperador, valor);
 
-            partes.remove(index + 1);
+            partesDaExpressao.remove(posicaoOperador + 1);
         }
 
-        while(partes.contains("^")){
-            index = partes.indexOf("^");
+        while(partesDaExpressao.contains("^")){
+            posicaoOperador = partesDaExpressao.indexOf("^");
 
-            Double num1 = Double.valueOf(partes.get(index - 1));
+            Double num1 = Double.valueOf(partesDaExpressao.get(posicaoOperador - 1));
             
-            Double num2 = Double.valueOf(partes.get(index + 1));
+            Double num2 = Double.valueOf(partesDaExpressao.get(posicaoOperador + 1));
 
             String valor = Calculadora.exponenciacao(num1, num2).toString();
 
-            partes.set(index - 1, valor);
+            partesDaExpressao.set(posicaoOperador - 1, valor);
 
-            partes.remove(index);
-            partes.remove(index);
+            partesDaExpressao.remove(posicaoOperador);
+            partesDaExpressao.remove(posicaoOperador);
         }
 
-        while(partes.contains("%")){
-            index = partes.indexOf("%");
+        while(partesDaExpressao.contains("%")){
+            posicaoOperador = partesDaExpressao.indexOf("%");
 
-            BigDecimal num1 = new BigDecimal(partes.get(index - 1));
+            BigDecimal num1 = new BigDecimal(partesDaExpressao.get(posicaoOperador - 1));
 
             String valor = Calculadora.porcentagem(num1).toString();
 
-            partes.set(index - 1, valor);
+            partesDaExpressao.set(posicaoOperador - 1, valor);
 
-            partes.remove(index);
+            partesDaExpressao.remove(posicaoOperador);
         }
 
-        while(partes.contains("x")){
+        while(partesDaExpressao.contains("x")){
 
-            index = partes.indexOf("x");
+            posicaoOperador = partesDaExpressao.indexOf("x");
 
-            BigDecimal num1 = new BigDecimal(partes.get(index - 1));
+            BigDecimal num1 = new BigDecimal(partesDaExpressao.get(posicaoOperador - 1));
 
-            BigDecimal num2 = new BigDecimal(partes.get(index + 1));
+            BigDecimal num2 = new BigDecimal(partesDaExpressao.get(posicaoOperador + 1));
 
             String valor = Calculadora.multiplicacao(num1, num2).toString();
 
-            partes.set(index - 1, valor);
+            partesDaExpressao.set(posicaoOperador - 1, valor);
             
-            partes.remove(index);
-            partes.remove(index);
+            partesDaExpressao.remove(posicaoOperador);
+            partesDaExpressao.remove(posicaoOperador);
         }
 
-        while(partes.contains("÷")){
+        while(partesDaExpressao.contains("÷")){
 
-            index = partes.indexOf("÷");
+            posicaoOperador = partesDaExpressao.indexOf("÷");
 
-            BigDecimal num1 = new BigDecimal(partes.get(index - 1));
+            BigDecimal num1 = new BigDecimal(partesDaExpressao.get(posicaoOperador - 1));
 
-            BigDecimal num2 = new BigDecimal(partes.get(index + 1));
+            BigDecimal num2 = new BigDecimal(partesDaExpressao.get(posicaoOperador + 1));
 
             if(num2.compareTo(BigDecimal.ZERO) == 0) throw new DivisaoPorZeroException();
 
             String valor = Calculadora.divisao(num1, num2).toString();
 
-            partes.set(index - 1, valor);
+            partesDaExpressao.set(posicaoOperador - 1, valor);
             
-            partes.remove(index);
-            partes.remove(index);       
+            partesDaExpressao.remove(posicaoOperador);
+            partesDaExpressao.remove(posicaoOperador);       
         }
 
-        while(partes.contains("+")){
+        while(partesDaExpressao.contains("+")){
 
-            index = partes.indexOf("+");
+            posicaoOperador = partesDaExpressao.indexOf("+");
 
-            BigDecimal num1 = new BigDecimal(partes.get(index - 1));
+            BigDecimal num1 = new BigDecimal(partesDaExpressao.get(posicaoOperador - 1));
 
-            BigDecimal num2 = new BigDecimal(partes.get(index + 1));
+            BigDecimal num2 = new BigDecimal(partesDaExpressao.get(posicaoOperador + 1));
 
             String valor = Calculadora.soma(num1, num2).toString();
 
-            partes.set(index - 1, valor);
+            partesDaExpressao.set(posicaoOperador - 1, valor);
             
-            partes.remove(index);
-            partes.remove(index);         
+            partesDaExpressao.remove(posicaoOperador);
+            partesDaExpressao.remove(posicaoOperador);         
         }
 
-        while(partes.contains("-")){
+        while(partesDaExpressao.contains("-")){
 
-            index = partes.indexOf("-");
+            posicaoOperador = partesDaExpressao.indexOf("-");
 
-            BigDecimal num1 = new BigDecimal(partes.get(index - 1));
+            BigDecimal num1 = new BigDecimal(partesDaExpressao.get(posicaoOperador - 1));
 
-            BigDecimal num2 = new BigDecimal(partes.get(index + 1));
+            BigDecimal num2 = new BigDecimal(partesDaExpressao.get(posicaoOperador + 1));
 
             String valor = Calculadora.subtracao(num1, num2).toString();
 
-            partes.set(index - 1, valor);
+            partesDaExpressao.set(posicaoOperador - 1, valor);
             
-            partes.remove(index);
-            partes.remove(index);       
+            partesDaExpressao.remove(posicaoOperador);
+            partesDaExpressao.remove(posicaoOperador);       
         }
 
-        if(partes.get(0).contains(".")){
-            partes.set(0, partes.get(0).replaceAll("\\.?0*$", ""));
-            partes.set(0, partes.get(0).replace(".", ","));
+        if(partesDaExpressao.get(0).contains(".")){
+            partesDaExpressao.set(0, partesDaExpressao.get(0).replaceAll("\\.?0*$", ""));
+            partesDaExpressao.set(0, partesDaExpressao.get(0).replace(".", ","));
         }
         
-        setResultado(partes.get(0));
+        setResultado(partesDaExpressao.get(0));
     }
 }
