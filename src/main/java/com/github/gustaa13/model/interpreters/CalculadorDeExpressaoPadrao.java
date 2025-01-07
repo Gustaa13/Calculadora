@@ -6,9 +6,9 @@ import java.util.List;
 import com.github.gustaa13.model.Calculadora;
 import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 
-public class InterpretadorPadrao extends InterpretadorCalculadora{
+public class CalculadorDeExpressaoPadrao extends InterpretadorCalculadora{
     
-    public InterpretadorPadrao(String expressao){
+    public CalculadorDeExpressaoPadrao(String expressao){
         super(expressao);
     }
 

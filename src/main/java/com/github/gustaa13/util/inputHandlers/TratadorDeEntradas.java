@@ -4,56 +4,57 @@ import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 
 public abstract class TratadorDeEntradas{
 
-    private static final String OPERADORES = "+-x÷";
+    private static final String OPERADORES = "+-x÷^√";
+    private static final String CARACTERESESPECIAIS = ",(";
     private Integer contadorDeAlgarismos;
     private boolean permitirVirgula; 
     private boolean permitirPorcentagem;
     private StringBuilder expressao;
-    private Integer contadorDeParentesesAbertos = 0;
-    private Integer contadorDeParentesesFechados = 0;
+    private Integer contadorDeParentesesAbertos;
+    private Integer contadorDeParentesesFechados;
 
-    public static String getOperadores() {
+    protected static String getOperadores() {
         return OPERADORES;
     }
 
-    public Integer getContadorDeAlgarismos() {
+    protected Integer getContadorDeAlgarismos() {
         return contadorDeAlgarismos;
     }
 
-    public void setContadorDeAlgarismos(Integer contadorDeAlgarismos){
+    protected void setContadorDeAlgarismos(Integer contadorDeAlgarismos){
         if(contadorDeAlgarismos > 15 || contadorDeAlgarismos < 0) return;
         this.contadorDeAlgarismos = contadorDeAlgarismos;
     }
 
-    public Integer getContadorDeParentesesAbertos(){
+    protected Integer getContadorDeParentesesAbertos(){
         return contadorDeParentesesAbertos;
     }
 
-    public void setContadorDeParentesesAbertos(Integer contadorDeParentesesAbertos){
+    protected void setContadorDeParentesesAbertos(Integer contadorDeParentesesAbertos){
         this.contadorDeParentesesAbertos = contadorDeParentesesAbertos;
     }
 
-    public Integer getContadorDeParentesesFechados(){
+    protected Integer getContadorDeParentesesFechados(){
         return contadorDeParentesesFechados;
     }
 
-    public void setContadorDeParentesesFechados(Integer contadorDeParentesesFechados){
+    protected void setContadorDeParentesesFechados(Integer contadorDeParentesesFechados){
         this.contadorDeParentesesFechados = contadorDeParentesesFechados;
     }
 
-    public boolean getPermitirVirgula() {
+    protected boolean getPermitirVirgula() {
         return permitirVirgula;
     }
 
-    public void setPermitirVirgula(boolean permitirVirgula) {
+    protected void setPermitirVirgula(boolean permitirVirgula) {
         this.permitirVirgula = permitirVirgula;
     }
 
-    public boolean getPermitirPorcentagem() {
+    protected boolean getPermitirPorcentagem() {
         return permitirPorcentagem;
     }
 
-    public void setPermitirPorcentagem(boolean permitirPorcentagem) {
+    protected void setPermitirPorcentagem(boolean permitirPorcentagem) {
         this.permitirPorcentagem = permitirPorcentagem;
     }
 
@@ -76,16 +77,15 @@ public abstract class TratadorDeEntradas{
 
     public TratadorDeEntradas(
 
-        Integer contadorDeAlgarismos, 
-        boolean permitirVirgula, 
-        boolean permitirPorcentagem, 
         StringBuilder expressao
 
         ){
+        this.contadorDeAlgarismos = 0;
+        this.contadorDeParentesesAbertos = 0;
+        this.contadorDeParentesesFechados = 0;
+        this.permitirPorcentagem = true;
+        this.permitirVirgula = true;
 
-        this.contadorDeAlgarismos = contadorDeAlgarismos;
-        this.permitirVirgula = permitirVirgula;
-        this.permitirPorcentagem = permitirPorcentagem;
         this.expressao = expressao;
 
     }
@@ -93,7 +93,7 @@ public abstract class TratadorDeEntradas{
     public abstract void adicionarCaracterNaExpressao(String caractere);
 
     protected boolean podeAdicionarCaracter(){
-        return expressao.length() > 0 && !(OPERADORES + "," + "(" + "^" + "√").contains(String.valueOf(expressao.charAt(expressao.length() - 1)));
+        return expressao.length() > 0 && !(OPERADORES + CARACTERESESPECIAIS).contains(String.valueOf(expressao.charAt(expressao.length() - 1)));
     }
 
     protected int posicaoDoUltimoNumero(){

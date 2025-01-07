@@ -33,17 +33,17 @@ public abstract class InterpretadorCalculadora {
         List<String> partesDaExpressao = new ArrayList<>();
         StringBuilder numero = new StringBuilder();
 
-        for(char c : expressao.toCharArray()){
-            if(Character.isDigit(c)){
-                numero.append(c);
-            }else if(c == ','){
+        for(char caracter : expressao.toCharArray()){
+            if(Character.isDigit(caracter)){
+                numero.append(caracter);
+            }else if(caracter == ','){
                 numero.append("."); 
-            }else if("+-x÷%()^√a".indexOf(c) != -1 ){
+            }else if("+-x÷%()^√a".indexOf(caracter) != -1 ){
                 if(numero.length() > 0){
                     partesDaExpressao.add(numero.toString());
                     numero.setLength(0);
                 }
-                partesDaExpressao.add(String.valueOf(c));
+                partesDaExpressao.add(String.valueOf(caracter));
             }
         }
 

@@ -3,10 +3,7 @@ package com.github.gustaa13.controller;
 import java.io.IOException;
 
 import com.github.gustaa13.application.CalculadoraApp;
-import com.github.gustaa13.model.interpreters.InterpretadorCientifico;
-import com.github.gustaa13.util.FomatadorDeExpressao;
 import com.github.gustaa13.util.GerenciadorDeTecla;
-import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 import com.github.gustaa13.util.inputHandlers.ExpressoesCientificas;
 
 import javafx.application.Platform;
@@ -16,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
-public class CalculadoraCientificaControlador {
+public class ControladorInterfaceCientico {
 
     @FXML
     private Button apagar;
@@ -95,164 +92,124 @@ public class CalculadoraCientificaControlador {
 
     ExpressoesCientificas calculadoraCientifica;
 
-    public void aplicarTecla(String caracter){
-
-        try {
-            calculadoraCientifica.adicionarCaracterNaExpressao(caracter);
-        } catch (DivisaoPorZeroException e) {
-            entrada.setText("Não é possível dividir por zero");
-            entrada.positionCaret(entrada.getLength());
-            return;
-        }
-        
-        if(!calculadoraCientifica.expressaoExiste()){
-            entrada.setText("0");
-        }else{
-            entrada.setText(FomatadorDeExpressao.formatar(calculadoraCientifica.getExpressao().toString()));
-        }
-
-        entrada.requestFocus();
-        entrada.positionCaret(entrada.getLength());
-    }
-
     @FXML
     void pressionarApagar(){
-        calculadoraCientifica.apagarCaractereDaExpresssao();
-        entrada.setText(calculadoraCientifica.getExpressao().length() > 0 ? FomatadorDeExpressao.formatar(calculadoraCientifica.getExpressao().toString()) : "0");     
-
-        entrada.requestFocus();
-        entrada.positionCaret(entrada.getLength());
+        ControladorDeTeclas.aplicarTeclaApagar(entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarApagarTudo(){
-        calculadoraCientifica.apagarExpressao();
-        entrada.setText("0");
-        entrada.requestFocus();
-        entrada.positionCaret(entrada.getLength());
+        ControladorDeTeclas.aplicarTeclaApagarTudo(entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarCinco(){
-        aplicarTecla(cinco.getText());
+        ControladorDeTeclas.aplicarTecla(cinco.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarDivisao(){
-        aplicarTecla(divisao.getText());
+        ControladorDeTeclas.aplicarTecla(divisao.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarDois(){
-        aplicarTecla(dois.getText());
+        ControladorDeTeclas.aplicarTecla(dois.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarExponenciacao(){
-        aplicarTecla(exponenciacao.getText());
+        ControladorDeTeclas.aplicarTecla(exponenciacao.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarIgual(){
-        if(!calculadoraCientifica.expressaoExiste()) return;
-        InterpretadorCientifico interpretador = new InterpretadorCientifico(calculadoraCientifica.getExpressaoFinal().toString());
-
-        try {
-            calculadoraCientifica.concluirExpressao();
-            interpretador.calcularResultadoTotal();
-
-            entrada.setText(FomatadorDeExpressao.formatar(interpretador.getResultado()));
-        } catch (DivisaoPorZeroException e) {
-            entrada.setText("Não é possível dividir por zero");
-            entrada.positionCaret(entrada.getLength());
-        }
-        
-        entrada.requestFocus();
+        ControladorDeTeclas.aplicarTeclaIgual(entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarMaisOUmenos(){
-        aplicarTecla(maisOUmenos.getText());
+        ControladorDeTeclas.aplicarTecla(maisOUmenos.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarValorAbsoluto(){
-        aplicarTecla(valorAbsoluto.getText());
+        ControladorDeTeclas.aplicarTecla(valorAbsoluto.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarMultiplicacao(){
-        aplicarTecla(multiplicacao.getText());
+        ControladorDeTeclas.aplicarTecla(multiplicacao.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarNove(){
-        aplicarTecla(nove.getText());
+        ControladorDeTeclas.aplicarTecla(nove.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarOito(){
-        aplicarTecla(oito.getText());
+        ControladorDeTeclas.aplicarTecla(oito.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarParenteses(){
-        aplicarTecla(parenteses.getText());
+        ControladorDeTeclas.aplicarTecla(parenteses.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarPorcentagem(){
-        aplicarTecla(porcentagem.getText());
+        ControladorDeTeclas.aplicarTecla(porcentagem.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarQuatro(){
-        aplicarTecla(quatro.getText());
+        ControladorDeTeclas.aplicarTecla(quatro.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarRadiciacao(){
-        aplicarTecla(radiciacao.getText());
+        ControladorDeTeclas.aplicarTecla(radiciacao.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarSeis(){
-        aplicarTecla(seis.getText());
+        ControladorDeTeclas.aplicarTecla(seis.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarSete(){
-        aplicarTecla(sete.getText());
+        ControladorDeTeclas.aplicarTecla(sete.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarSoma(){
-        aplicarTecla(soma.getText());
+        ControladorDeTeclas.aplicarTecla(soma.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarSubtracao(){
-        aplicarTecla(subtracao.getText());
+        ControladorDeTeclas.aplicarTecla(subtracao.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarTres(){
-        aplicarTecla(tres.getText());
+        ControladorDeTeclas.aplicarTecla(tres.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarUm(){
-        aplicarTecla(um.getText());
+        ControladorDeTeclas.aplicarTecla(um.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarVirgula(){
-        aplicarTecla(virgula.getText());
+        ControladorDeTeclas.aplicarTecla(virgula.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
     void pressionarZero(ActionEvent event){
-        aplicarTecla(zero.getText());
+        ControladorDeTeclas.aplicarTecla(zero.getText(), entrada, calculadoraCientifica);
     }
 
     @FXML
@@ -262,7 +219,7 @@ public class CalculadoraCientificaControlador {
 
     @FXML
     public void initialize(){
-        calculadoraCientifica = new ExpressoesCientificas(0, true, true, new StringBuilder());
+        calculadoraCientifica = new ExpressoesCientificas(new StringBuilder());
 
         Platform.runLater(() -> {
             entrada.getParent().requestFocus();

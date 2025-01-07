@@ -1,25 +1,17 @@
 package com.github.gustaa13.util.inputHandlers;
 
-import com.github.gustaa13.util.AlertaGeral;
 import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
-
-import javafx.scene.control.Alert.AlertType;
 
 public class ExpressoesPadroes extends TratadorDeEntradas {
 
     public ExpressoesPadroes(
         
-        Integer contadorDeAlgarismos, 
-        boolean permitirVirgula, 
-        boolean permitirPorcentagem, 
+        
         StringBuilder expressao
         
         ){
 
         super(
-            contadorDeAlgarismos, 
-            permitirVirgula, 
-            permitirPorcentagem, 
             expressao
         );
 

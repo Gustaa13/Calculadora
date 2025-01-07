@@ -3,11 +3,8 @@ package com.github.gustaa13.controller;
 import java.io.IOException;
 
 import com.github.gustaa13.application.CalculadoraApp;
-import com.github.gustaa13.model.interpreters.InterpretadorPadrao;
 import com.github.gustaa13.util.GerenciadorDeTecla;
-import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 import com.github.gustaa13.util.inputHandlers.ExpressoesPadroes;
-import com.github.gustaa13.util.FomatadorDeExpressao;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -15,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
-public class CalculadoraPadraoControlador {
+public class ControladorInterfacePadrao {
 
     @FXML
     private Button apagar;
@@ -82,139 +79,99 @@ public class CalculadoraPadraoControlador {
 
     ExpressoesPadroes calculadoraPadrao;
 
-    public void aplicarTecla(String caracter){
-
-        try {
-            calculadoraPadrao.adicionarCaracterNaExpressao(caracter);
-        } catch (DivisaoPorZeroException e) {
-            entrada.setText("Não é possível dividir por zero");
-            entrada.positionCaret(entrada.getLength());
-            return;
-        }
-        
-        if(!calculadoraPadrao.expressaoExiste()){
-            entrada.setText("0");
-        }else{
-            entrada.setText(FomatadorDeExpressao.formatar(calculadoraPadrao.getExpressao().toString()));
-        }
-
-        entrada.requestFocus();
-        entrada.positionCaret(entrada.getLength());
-    }
-
     @FXML
     private void pressionarApagar(){
-        calculadoraPadrao.apagarCaractereDaExpresssao();
-        entrada.setText(calculadoraPadrao.getExpressao().length() > 0 ? FomatadorDeExpressao.formatar(calculadoraPadrao.getExpressao().toString()) : "0");     
-
-        entrada.requestFocus();
-        entrada.positionCaret(entrada.getLength());
+        ControladorDeTeclas.aplicarTeclaApagarTudo(entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarApagarTudo(){
-        calculadoraPadrao.apagarExpressao();
-        entrada.setText("0");
-        entrada.requestFocus();
-        entrada.positionCaret(entrada.getLength());
+        ControladorDeTeclas.aplicarTeclaApagarTudo(entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarZero(){
-        aplicarTecla(zero.getText());
+        ControladorDeTeclas.aplicarTecla(zero.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarUm(){
-        aplicarTecla(um.getText());
+        ControladorDeTeclas.aplicarTecla(um.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarDois(){
-        aplicarTecla(dois.getText());
+        ControladorDeTeclas.aplicarTecla(dois.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarTres(){
-        aplicarTecla(tres.getText());
+        ControladorDeTeclas.aplicarTecla(tres.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarQuatro(){
-        aplicarTecla(quatro.getText());
+        ControladorDeTeclas.aplicarTecla(quatro.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarCinco(){
-        aplicarTecla(cinco.getText());
+        ControladorDeTeclas.aplicarTecla(cinco.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarSeis(){
-        aplicarTecla(seis.getText());
+        ControladorDeTeclas.aplicarTecla(seis.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarSete(){
-        aplicarTecla(sete.getText());
+        ControladorDeTeclas.aplicarTecla(sete.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarOito(){
-        aplicarTecla(oito.getText());
+        ControladorDeTeclas.aplicarTecla(oito.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarNove(){
-        aplicarTecla(nove.getText());
+        ControladorDeTeclas.aplicarTecla(nove.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarSoma(){
-        aplicarTecla(soma.getText());
+        ControladorDeTeclas.aplicarTecla(soma.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarSubtracao(){
-        aplicarTecla(subtracao.getText());
+        ControladorDeTeclas.aplicarTecla(subtracao.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarMultiplicacao(){
-        aplicarTecla(multiplicacao.getText());
+        ControladorDeTeclas.aplicarTecla(multiplicacao.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarDivisao(){
-        aplicarTecla(divisao.getText());
+        ControladorDeTeclas.aplicarTecla(divisao.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarIgual(){
-        if(!calculadoraPadrao.expressaoExiste()) return;
-        InterpretadorPadrao interpretador = new InterpretadorPadrao(calculadoraPadrao.getExpressao().toString());
-
-        try {
-            calculadoraPadrao.concluirExpressao();
-            interpretador.calcularResultadoTotal();
-
-            entrada.setText(FomatadorDeExpressao.formatar(interpretador.getResultado()));
-        } catch (DivisaoPorZeroException e) {
-            entrada.setText("Não é possível dividir por zero");
-            entrada.positionCaret(entrada.getLength());
-        }
-
-        entrada.requestFocus();
+        ControladorDeTeclas.aplicarTeclaIgual(entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarVirgula(){
-        aplicarTecla(virgula.getText());
+        ControladorDeTeclas.aplicarTecla(virgula.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
     private void pressionarPorcentagem(){
-        aplicarTecla(porcentagem.getText());
+        ControladorDeTeclas.aplicarTecla(porcentagem.getText(), entrada, calculadoraPadrao);
     }
 
     @FXML
@@ -224,7 +181,7 @@ public class CalculadoraPadraoControlador {
 
     @FXML
     public void initialize(){
-        calculadoraPadrao = new ExpressoesPadroes(0, true, true, new StringBuilder());
+        calculadoraPadrao = new ExpressoesPadroes(new StringBuilder());
 
         Platform.runLater(() -> {
             entrada.getParent().requestFocus();
