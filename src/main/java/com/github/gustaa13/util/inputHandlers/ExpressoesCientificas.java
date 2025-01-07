@@ -27,9 +27,9 @@ public class ExpressoesCientificas extends TratadorDeEntradas {
 
     public void adicionarCaracterNaExpressao(String caractere){
         if(getExpressao().length() >= 100){
-            AlertaGeral alertaDeCaracteres = new AlertaGeral(AlertType.INFORMATION, "Alerta de caraceteres", "Não é possível inserir mais de 100 caracteres.", 1.5);
+            /*AlertaGeral alertaDeCaracteres = new AlertaGeral(AlertType.INFORMATION, "Alerta de caraceteres", "Não é possível inserir mais de 100 caracteres.", 1.5);
 
-            alertaDeCaracteres.exibirAlerta();
+            alertaDeCaracteres.exibirAlerta();*/
 
             return;
         }
