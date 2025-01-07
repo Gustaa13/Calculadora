@@ -20,7 +20,7 @@ public class AlertaGeral {
         this.segundos = segundos;
     }
 
-    public void janelaDeAlerta(){
+    public void exibirAlerta(){
         Alert alerta = new Alert(tipo);
 
         alerta.setTitle(titulo);

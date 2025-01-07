@@ -1,7 +1,6 @@
-module com.github.gustaa13 {
+module com.github.gustaa {
     requires transitive javafx.controls;
     requires javafx.fxml;
-    requires javafx.base;
 
     opens com.github.gustaa13.application to javafx.fxml;
     opens com.github.gustaa13.controller to javafx.fxml;
