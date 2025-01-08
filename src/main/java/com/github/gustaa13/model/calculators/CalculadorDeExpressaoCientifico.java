@@ -1,4 +1,4 @@
-package com.github.gustaa13.model.interpreters;
+package com.github.gustaa13.model.calculators;
 
 import java.math.BigDecimal;
 import java.util.List;

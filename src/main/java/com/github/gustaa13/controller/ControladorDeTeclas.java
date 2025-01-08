@@ -1,7 +1,7 @@
 package com.github.gustaa13.controller;
 
-import com.github.gustaa13.model.interpreters.CalculadorDeExpressaoCientifico;
-import com.github.gustaa13.model.interpreters.CalculadorDeExpressaoPadrao;
+import com.github.gustaa13.model.calculators.CalculadorDeExpressaoCientifico;
+import com.github.gustaa13.model.calculators.CalculadorDeExpressaoPadrao;
 import com.github.gustaa13.util.FomatadorDeExpressao;
 import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 import com.github.gustaa13.util.inputHandlers.ExpressoesCientificas;

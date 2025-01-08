@@ -1,4 +1,4 @@
-package com.github.gustaa13.model.interpreters;
+package com.github.gustaa13.model.calculators;
 
 import java.util.ArrayList;
 import java.util.List;
