@@ -77,101 +77,101 @@ public class ControladorInterfacePadrao {
     @FXML
     private Button zero;
 
-    ExpressoesPadroes calculadoraPadrao;
+    ExpressoesPadroes expressaoPadrao;
 
     @FXML
     private void pressionarApagar(){
-        ControladorDeTeclas.aplicarTeclaApagar(entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTeclaApagar(entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarApagarTudo(){
-        ControladorDeTeclas.aplicarTeclaApagarTudo(entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTeclaApagarTudo(entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarZero(){
-        ControladorDeTeclas.aplicarTecla(zero.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(zero.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarUm(){
-        ControladorDeTeclas.aplicarTecla(um.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(um.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarDois(){
-        ControladorDeTeclas.aplicarTecla(dois.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(dois.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarTres(){
-        ControladorDeTeclas.aplicarTecla(tres.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(tres.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarQuatro(){
-        ControladorDeTeclas.aplicarTecla(quatro.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(quatro.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarCinco(){
-        ControladorDeTeclas.aplicarTecla(cinco.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(cinco.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarSeis(){
-        ControladorDeTeclas.aplicarTecla(seis.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(seis.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarSete(){
-        ControladorDeTeclas.aplicarTecla(sete.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(sete.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarOito(){
-        ControladorDeTeclas.aplicarTecla(oito.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(oito.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarNove(){
-        ControladorDeTeclas.aplicarTecla(nove.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(nove.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarSoma(){
-        ControladorDeTeclas.aplicarTecla(soma.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(soma.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarSubtracao(){
-        ControladorDeTeclas.aplicarTecla(subtracao.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(subtracao.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarMultiplicacao(){
-        ControladorDeTeclas.aplicarTecla(multiplicacao.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(multiplicacao.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarDivisao(){
-        ControladorDeTeclas.aplicarTecla(divisao.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(divisao.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarIgual(){
-        ControladorDeTeclas.aplicarTeclaIgual(entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTeclaIgual(entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarVirgula(){
-        ControladorDeTeclas.aplicarTecla(virgula.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(virgula.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
     private void pressionarPorcentagem(){
-        ControladorDeTeclas.aplicarTecla(porcentagem.getText(), entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTecla(porcentagem.getText(), entrada, expressaoPadrao);
     }
 
     @FXML
@@ -181,7 +181,7 @@ public class ControladorInterfacePadrao {
 
     @FXML
     public void initialize(){
-        calculadoraPadrao = new ExpressoesPadroes(new StringBuilder());
+        expressaoPadrao = new ExpressoesPadroes(new StringBuilder());
 
         Platform.runLater(() -> {
             entrada.getParent().requestFocus();

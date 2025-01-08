@@ -115,7 +115,12 @@ public class ExpressoesCientificas extends TratadorDeEntradas {
             setPermitirVirgula(true);
             setContadorDeAlgarismos(0);
         }else if(caractere.equals("√")){
-            getExpressao().append("√");
+            if(getContadorDeAlgarismos() == 0){
+                getExpressao().append("√");
+            }else{
+                getExpressao().append("x√");
+            }
+            
         }
     }
 }

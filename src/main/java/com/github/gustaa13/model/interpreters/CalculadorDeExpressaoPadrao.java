@@ -1,46 +1,113 @@
 package com.github.gustaa13.model.interpreters;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.github.gustaa13.model.Calculadora;
 import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 import com.github.gustaa13.util.exceptions.PosicaoNaoExisteException;
 
-public class CalculadorDeExpressaoPadrao extends InterpretadorCalculadora{
+public class CalculadorDeExpressaoPadrao{
 
+    private String expressao;
+    private List<String> expressaoVetorizada;
+    private String resultado;
+    private String operadores;
     private int posicaoOperador;
     private BigDecimal numeroPosterior;
     private BigDecimal numeroAntecessor;
-    
-    public CalculadorDeExpressaoPadrao(String expressao){
-        super(expressao, "+-x÷%");
-        posicaoOperador = 0;
+
+    public int getPosicaoOperador() {
+        return posicaoOperador;
+    }
+
+    public void setPosicaoOperador(int posicaoOperador) {
+        this.posicaoOperador = posicaoOperador;
+    }
+
+    public BigDecimal getNumeroPosterior() {
+        return numeroPosterior;
+    }
+
+    public void setNumeroPosterior(BigDecimal numeroPosterior) {
+        this.numeroPosterior = numeroPosterior;
+    }
+
+    public BigDecimal getNumeroAntecessor() {
+        return numeroAntecessor;
+    }
+
+    public void setNumeroAntecessor(BigDecimal numeroAntecessor) {
+        this.numeroAntecessor = numeroAntecessor;
+    }
+
+    public List<String> getExpressaoVetorizada() {
+        return expressaoVetorizada;
+    }
+
+    public void setExpressaoVetorizada(List<String> expressaoVetorizada) {
+        this.expressaoVetorizada = expressaoVetorizada;
+    }
+
+    public CalculadorDeExpressaoPadrao(String expressao) {
+        this.expressao = expressao;
+        operadores = "+-x÷%";
+        
+        expressaoVetorizada = new ArrayList<>();
+        expressaoVetorizada = VetorizacaoDeExpressao.vetorizar(expressao, operadores);
         numeroPosterior = new BigDecimal(0);
         numeroAntecessor = new BigDecimal(0);
     }
 
-    private void obterPosicaoOperador(String operador){
-        posicaoOperador = getExpressaoSeparada().indexOf(operador);
+    protected CalculadorDeExpressaoPadrao(String expressao, String operadores) {
+        this.expressao = expressao;
+        this.operadores = operadores;
+        
+        expressaoVetorizada = new ArrayList<>();
+        expressaoVetorizada = VetorizacaoDeExpressao.vetorizar(expressao, operadores);
+        numeroPosterior = new BigDecimal(0);
+        numeroAntecessor = new BigDecimal(0);
     }
 
-    private void obterNumeroAntecessorAoOperador(String operador){
+    public String getExpressao() {
+        return expressao;
+    }
+
+    public void setExpressao(String expressao) {
+        this.expressao = expressao;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
+
+    protected void obterPosicaoOperador(String operador){
+        posicaoOperador = expressaoVetorizada.indexOf(operador);
+    }
+
+    protected void obterNumeroAntecessorAoOperador(String operador){
         obterPosicaoOperador(operador);
 
         if(posicaoOperador < 0) throw new PosicaoNaoExisteException();
         
-        numeroAntecessor = new BigDecimal(getExpressaoSeparada().get(posicaoOperador - 1));
+        numeroAntecessor = new BigDecimal(expressaoVetorizada.get(posicaoOperador - 1));
     }
 
-    private void obterNumeroPosteriorAoOperador(String operador){
+    protected void obterNumeroPosteriorAoOperador(String operador){
         obterPosicaoOperador(operador);
 
-        if(posicaoOperador > getExpressaoSeparada().size()) throw new PosicaoNaoExisteException();
+        if(posicaoOperador > expressaoVetorizada.size()) throw new PosicaoNaoExisteException();
 
-        numeroAntecessor = new BigDecimal(getExpressaoSeparada().get(posicaoOperador + 1));
+        numeroPosterior = new BigDecimal(expressaoVetorizada.get(posicaoOperador + 1));
     }
 
     public void calcularPorcentagens(String operador){
-        while(getExpressaoSeparada().contains(operador)){
+        while(expressaoVetorizada.contains(operador)){
 
             try {
                 obterNumeroAntecessorAoOperador(operador);
@@ -50,14 +117,14 @@ public class CalculadorDeExpressaoPadrao extends InterpretadorCalculadora{
             
             String valor = Calculadora.porcentagem(numeroAntecessor).toString();
 
-            getExpressaoSeparada().set(posicaoOperador - 1, valor);
+            expressaoVetorizada.set(posicaoOperador - 1, valor);
 
-            getExpressaoSeparada().remove(posicaoOperador);
+            expressaoVetorizada.remove(posicaoOperador);
         }
     }
 
     public void calcularMultiplicacoes(String operador){
-        while(getExpressaoSeparada().contains(operador)){
+        while(expressaoVetorizada.contains(operador)){
 
             try {
                 obterNumeroAntecessorAoOperador(operador);
@@ -73,15 +140,15 @@ public class CalculadorDeExpressaoPadrao extends InterpretadorCalculadora{
             
             String valor = Calculadora.multiplicacao(numeroAntecessor, numeroPosterior).toString();
 
-            getExpressaoSeparada().set(posicaoOperador - 1, valor);
+            expressaoVetorizada.set(posicaoOperador - 1, valor);
             
-            getExpressaoSeparada().remove(posicaoOperador);
-            getExpressaoSeparada().remove(posicaoOperador);
+            expressaoVetorizada.remove(posicaoOperador);
+            expressaoVetorizada.remove(posicaoOperador);
         }
     }
 
     public void calcularDivisoes(String operador){
-        while(getExpressaoSeparada().contains(operador)){
+        while(expressaoVetorizada.contains(operador)){
 
             try {
                 obterNumeroAntecessorAoOperador(operador);
@@ -103,15 +170,15 @@ public class CalculadorDeExpressaoPadrao extends InterpretadorCalculadora{
                 throw new DivisaoPorZeroException();
             }
             
-            getExpressaoSeparada().set(posicaoOperador - 1, valor);
+            expressaoVetorizada.set(posicaoOperador - 1, valor);
             
-            getExpressaoSeparada().remove(posicaoOperador);
-            getExpressaoSeparada().remove(posicaoOperador);       
+            expressaoVetorizada.remove(posicaoOperador);
+            expressaoVetorizada.remove(posicaoOperador);       
         }
     }
 
     public void calcularSomas(String operador){
-        while(getExpressaoSeparada().contains(operador)){
+        while(expressaoVetorizada.contains(operador)){
 
             try {
                 obterNumeroAntecessorAoOperador(operador);
@@ -127,15 +194,15 @@ public class CalculadorDeExpressaoPadrao extends InterpretadorCalculadora{
 
             String valor = Calculadora.soma(numeroAntecessor, numeroPosterior).toString();
 
-            getExpressaoSeparada().set(posicaoOperador - 1, valor);
+            expressaoVetorizada.set(posicaoOperador - 1, valor);
             
-            getExpressaoSeparada().remove(posicaoOperador);
-            getExpressaoSeparada().remove(posicaoOperador);         
+            expressaoVetorizada.remove(posicaoOperador);
+            expressaoVetorizada.remove(posicaoOperador);         
         }
     }
 
     public void calcularSubtracoes(String operador){
-        while(getExpressaoSeparada().contains(operador)){
+        while(expressaoVetorizada.contains(operador)){
 
             try {
                 obterNumeroAntecessorAoOperador(operador);
@@ -151,17 +218,17 @@ public class CalculadorDeExpressaoPadrao extends InterpretadorCalculadora{
 
             String valor = Calculadora.subtracao(numeroAntecessor, numeroPosterior).toString();
 
-            getExpressaoSeparada().set(posicaoOperador - 1, valor);
+            expressaoVetorizada.set(posicaoOperador - 1, valor);
             
-            getExpressaoSeparada().remove(posicaoOperador);
-            getExpressaoSeparada().remove(posicaoOperador);       
+            expressaoVetorizada.remove(posicaoOperador);
+            expressaoVetorizada.remove(posicaoOperador);       
         }
     }
 
     public void tratadorDeExpressao(){
-        if(getExpressaoSeparada().get(0).contains(".")){
-            getExpressaoSeparada().set(0, getExpressaoSeparada().get(0).replaceAll("\\.?0*$", ""));
-            getExpressaoSeparada().set(0, getExpressaoSeparada().get(0).replace(".", ","));
+        if(expressaoVetorizada.get(0).contains(".")){
+            expressaoVetorizada.set(0, expressaoVetorizada.get(0).replaceAll("\\.?0*$", ""));
+            expressaoVetorizada.set(0, expressaoVetorizada.get(0).replace(".", ","));
         }
     }
 
@@ -179,6 +246,6 @@ public class CalculadorDeExpressaoPadrao extends InterpretadorCalculadora{
 
         tratadorDeExpressao();
         
-        setResultado(getExpressaoSeparada().get(0));
+        setResultado(expressaoVetorizada.get(0));
     }
 }
