@@ -5,10 +5,30 @@ import java.util.List;
 
 public abstract class InterpretadorCalculadora {
     private String expressao;
+    private List<String> expressaoSeparada = new ArrayList<>();
     private String resultado;
+    private String operadores;
 
-    public InterpretadorCalculadora(String expressao) {
+    public List<String> getExpressaoSeparada() {
+        return expressaoSeparada;
+    }
+
+    public void setExpressaoSeparada(List<String> expressaoSeparada) {
+        this.expressaoSeparada = expressaoSeparada;
+    }
+
+    public String getOperadores() {
+        return operadores;
+    }
+
+    public void setOperadores(String operadores) {
+        this.operadores = operadores;
+    }
+
+    public InterpretadorCalculadora(String expressao, String operadores) {
         this.expressao = expressao;
+        this.operadores = operadores;
+        this.expressaoSeparada = separadorDeExpressao();
     }
 
     public String getExpressao() {
@@ -29,8 +49,7 @@ public abstract class InterpretadorCalculadora {
 
     public abstract void calcularResultadoTotal();
 
-    protected List<String> separadorDeExpressao(){
-        List<String> partesDaExpressao = new ArrayList<>();
+    private List<String> separadorDeExpressao(){
         StringBuilder numero = new StringBuilder();
 
         for(char caracter : expressao.toCharArray()){
@@ -38,27 +57,25 @@ public abstract class InterpretadorCalculadora {
                 numero.append(caracter);
             }else if(caracter == ','){
                 numero.append("."); 
-            }else if("+-x÷%()^√a".indexOf(caracter) != -1 ){
+            }else if(operadores.indexOf(caracter) != -1){
                 if(numero.length() > 0){
-                    partesDaExpressao.add(numero.toString());
+                    expressaoSeparada.add(numero.toString());
                     numero.setLength(0);
                 }
-                partesDaExpressao.add(String.valueOf(caracter));
+                expressaoSeparada.add(String.valueOf(caracter));
             }
         }
 
         if(numero.length() > 0){
-            partesDaExpressao.add(numero.toString());
+            expressaoSeparada.add(numero.toString());
         }else{
-            if(partesDaExpressao.get(partesDaExpressao.size() - 1).matches("[x÷]")){
-                partesDaExpressao.add("1");
-            }else if(partesDaExpressao.get(partesDaExpressao.size() - 1).matches("[)]")){
-                return partesDaExpressao;
-            }else{
-                partesDaExpressao.add("0");
+            if(expressaoSeparada.get(expressaoSeparada.size() - 1).matches("[x÷]")){
+                expressaoSeparada.add("1");
+            }else if(expressaoSeparada.get(expressaoSeparada.size() - 1).matches("[)]")){
+                return expressaoSeparada;
             }
         }
 
-        return partesDaExpressao;
+        return expressaoSeparada;
     }
 }

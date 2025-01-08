@@ -3,6 +3,8 @@ package com.github.gustaa13.model;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
+
 public class Calculadora {
     static MathContext mc = new MathContext(16);
         
@@ -19,6 +21,7 @@ public class Calculadora {
     }
 
     public static BigDecimal divisao(BigDecimal num1, BigDecimal num2){
+        if(num2.compareTo(BigDecimal.ZERO) == 0) throw new DivisaoPorZeroException();
         return num1.divide(num2, mc);
     }
 

@@ -81,7 +81,7 @@ public class ControladorInterfacePadrao {
 
     @FXML
     private void pressionarApagar(){
-        ControladorDeTeclas.aplicarTeclaApagarTudo(entrada, calculadoraPadrao);
+        ControladorDeTeclas.aplicarTeclaApagar(entrada, calculadoraPadrao);
     }
 
     @FXML
