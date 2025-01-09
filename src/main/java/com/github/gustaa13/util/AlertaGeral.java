@@ -1,23 +1,19 @@
 package com.github.gustaa13.util;
 
-import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.util.Duration;
+
 
 public class AlertaGeral {
 
     private AlertType tipo;
     private String titulo;
     private String mensagem;
-    private Double segundos;
 
-    public AlertaGeral(AlertType tipo, String titulo, String mensagem, Double segundos) {
+    public AlertaGeral(AlertType tipo, String titulo, String mensagem) {
         this.tipo = tipo;
         this.titulo = titulo;
         this.mensagem = mensagem;
-        this.segundos = segundos;
     }
 
     public void exibirAlerta(){
@@ -28,12 +24,5 @@ public class AlertaGeral {
         alerta.setContentText(mensagem);
 
         alerta.show();
-
-        PauseTransition pausa = new PauseTransition(Duration.seconds(segundos)); 
-        pausa.setOnFinished(event -> {
-            Platform.runLater(() -> alerta.close());
-        });
-
-        pausa.play();
     }
 }

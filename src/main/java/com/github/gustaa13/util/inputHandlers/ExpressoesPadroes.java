@@ -4,17 +4,8 @@ import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 
 public class ExpressoesPadroes extends TratadorDeEntradas {
 
-    public ExpressoesPadroes(
-        
-        
-        StringBuilder expressao
-        
-        ){
-
-        super(
-            expressao
-        );
-
+    public ExpressoesPadroes(StringBuilder expressao){
+        super(expressao);
     }
     
     public void adicionarCaracterNaExpressao(String caractere){

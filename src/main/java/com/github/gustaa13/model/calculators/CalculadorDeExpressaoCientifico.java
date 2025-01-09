@@ -22,7 +22,8 @@ public class CalculadorDeExpressaoCientifico extends CalculadorDeExpressaoPadrao
             try {
                 obterNumeroPosteriorAoOperador(operador);
             } catch(PosicaoNaoExisteException e){
-                setNumeroPosterior(new BigDecimal(0));
+                getExpressaoVetorizada().add("0");
+                obterNumeroPosteriorAoOperador(operador);
             }
 
             String valor = Calculadora.radiciacaoQuadrada(getNumeroPosterior()).toString();
@@ -39,13 +40,15 @@ public class CalculadorDeExpressaoCientifico extends CalculadorDeExpressaoPadrao
             try {
                 obterNumeroAntecessorAoOperador(operador);
             } catch(PosicaoNaoExisteException e){
-                setNumeroAntecessor(new BigDecimal(0));
+                getExpressaoVetorizada().add(getPosicaoOperador(), "0");
+                obterNumeroAntecessorAoOperador(operador);
             }
 
             try {
                 obterNumeroPosteriorAoOperador(operador);
             } catch(PosicaoNaoExisteException e){
-                setNumeroPosterior(new BigDecimal(0));
+                getExpressaoVetorizada().add("0");
+                obterNumeroPosteriorAoOperador(operador);
             }   
 
             String valor = Calculadora.exponenciacao(Double.valueOf(getNumeroAntecessor().toString()), Double.valueOf(getNumeroPosterior().toString())).toString();

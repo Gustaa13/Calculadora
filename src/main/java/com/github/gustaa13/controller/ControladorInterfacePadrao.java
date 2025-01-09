@@ -3,7 +3,7 @@ package com.github.gustaa13.controller;
 import java.io.IOException;
 
 import com.github.gustaa13.application.CalculadoraApp;
-import com.github.gustaa13.util.GerenciadorDeTecla;
+import com.github.gustaa13.util.ControladorDeTeclas;
 import com.github.gustaa13.util.inputHandlers.ExpressoesPadroes;
 
 import javafx.application.Platform;
@@ -186,59 +186,59 @@ public class ControladorInterfacePadrao {
         Platform.runLater(() -> {
             entrada.getParent().requestFocus();
             
-            GerenciadorDeTecla.adicionarEventoAoPressionar(apagar, KeyCode.BACK_SPACE);
+            ControladorDeTeclas.adicionarEventoAoPressionar(apagar, KeyCode.BACK_SPACE);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(apagarTudo, KeyCode.DELETE);
+            ControladorDeTeclas.adicionarEventoAoPressionar(apagarTudo, KeyCode.DELETE);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(zero, KeyCode.DIGIT0);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(zero, KeyCode.NUMPAD0);
+            ControladorDeTeclas.adicionarEventoAoPressionar(zero, KeyCode.DIGIT0);
+            ControladorDeTeclas.adicionarEventoAoPressionar(zero, KeyCode.NUMPAD0);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(um, KeyCode.DIGIT1);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(um, KeyCode.NUMPAD1);
+            ControladorDeTeclas.adicionarEventoAoPressionar(um, KeyCode.DIGIT1);
+            ControladorDeTeclas.adicionarEventoAoPressionar(um, KeyCode.NUMPAD1);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(dois, KeyCode.DIGIT2);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(dois, KeyCode.NUMPAD2);
+            ControladorDeTeclas.adicionarEventoAoPressionar(dois, KeyCode.DIGIT2);
+            ControladorDeTeclas.adicionarEventoAoPressionar(dois, KeyCode.NUMPAD2);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(tres, KeyCode.DIGIT3);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(tres, KeyCode.NUMPAD3);
+            ControladorDeTeclas.adicionarEventoAoPressionar(tres, KeyCode.DIGIT3);
+            ControladorDeTeclas.adicionarEventoAoPressionar(tres, KeyCode.NUMPAD3);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(quatro, KeyCode.DIGIT4);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(quatro, KeyCode.NUMPAD4);
+            ControladorDeTeclas.adicionarEventoAoPressionar(quatro, KeyCode.DIGIT4);
+            ControladorDeTeclas.adicionarEventoAoPressionar(quatro, KeyCode.NUMPAD4);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(cinco, KeyCode.DIGIT5);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(cinco, KeyCode.NUMPAD5);
+            ControladorDeTeclas.adicionarEventoAoPressionar(cinco, KeyCode.DIGIT5);
+            ControladorDeTeclas.adicionarEventoAoPressionar(cinco, KeyCode.NUMPAD5);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(seis, KeyCode.DIGIT6);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(seis, KeyCode.NUMPAD6);
+            ControladorDeTeclas.adicionarEventoAoPressionar(seis, KeyCode.DIGIT6);
+            ControladorDeTeclas.adicionarEventoAoPressionar(seis, KeyCode.NUMPAD6);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(sete, KeyCode.DIGIT7);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(sete, KeyCode.NUMPAD7); 
+            ControladorDeTeclas.adicionarEventoAoPressionar(sete, KeyCode.DIGIT7);
+            ControladorDeTeclas.adicionarEventoAoPressionar(sete, KeyCode.NUMPAD7); 
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(oito, KeyCode.DIGIT8);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(oito, KeyCode.NUMPAD8);
+            ControladorDeTeclas.adicionarEventoAoPressionar(oito, KeyCode.DIGIT8);
+            ControladorDeTeclas.adicionarEventoAoPressionar(oito, KeyCode.NUMPAD8);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(nove, KeyCode.DIGIT9);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(nove, KeyCode.NUMPAD9);
+            ControladorDeTeclas.adicionarEventoAoPressionar(nove, KeyCode.DIGIT9);
+            ControladorDeTeclas.adicionarEventoAoPressionar(nove, KeyCode.NUMPAD9);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(soma, KeyCode.ADD);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(soma, KeyCode.EQUALS, true);
+            ControladorDeTeclas.adicionarEventoAoPressionar(soma, KeyCode.ADD);
+            ControladorDeTeclas.adicionarEventoAoPressionar(soma, KeyCode.EQUALS, true);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(subtracao, KeyCode.SUBTRACT);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(subtracao, KeyCode.MINUS);
+            ControladorDeTeclas.adicionarEventoAoPressionar(subtracao, KeyCode.SUBTRACT);
+            ControladorDeTeclas.adicionarEventoAoPressionar(subtracao, KeyCode.MINUS);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(multiplicacao, KeyCode.MULTIPLY);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(multiplicacao, KeyCode.DIGIT8, true);
+            ControladorDeTeclas.adicionarEventoAoPressionar(multiplicacao, KeyCode.MULTIPLY);
+            ControladorDeTeclas.adicionarEventoAoPressionar(multiplicacao, KeyCode.DIGIT8, true);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(divisao, KeyCode.DIVIDE);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(divisao, KeyCode.SLASH);
+            ControladorDeTeclas.adicionarEventoAoPressionar(divisao, KeyCode.DIVIDE);
+            ControladorDeTeclas.adicionarEventoAoPressionar(divisao, KeyCode.SLASH);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(igual, KeyCode.ENTER);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(igual, KeyCode.EQUALS);
+            ControladorDeTeclas.adicionarEventoAoPressionar(igual, KeyCode.ENTER);
+            ControladorDeTeclas.adicionarEventoAoPressionar(igual, KeyCode.EQUALS);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(virgula, KeyCode.COMMA);
-            GerenciadorDeTecla.adicionarEventoAoPressionar(virgula, KeyCode.DECIMAL);
+            ControladorDeTeclas.adicionarEventoAoPressionar(virgula, KeyCode.COMMA);
+            ControladorDeTeclas.adicionarEventoAoPressionar(virgula, KeyCode.DECIMAL);
 
-            GerenciadorDeTecla.adicionarEventoAoPressionar(porcentagem, KeyCode.DIGIT5, true);
+            ControladorDeTeclas.adicionarEventoAoPressionar(porcentagem, KeyCode.DIGIT5, true);
         });
     }
 }

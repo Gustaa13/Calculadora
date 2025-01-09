@@ -110,7 +110,7 @@ public abstract class TratadorDeEntradas{
     }
 
     protected void erroDivisaoPorZero(){
-        if(numeroAnteriorIgualaZero() && expressao.charAt(posicaoDoUltimoNumero() - 1) == '÷'){
+        if(numeroAnteriorIgualaZero() && posicaoDoUltimoNumero() > 0 && expressao.charAt(posicaoDoUltimoNumero() - 1) == '÷'){
             throw new DivisaoPorZeroException();
         }
     }

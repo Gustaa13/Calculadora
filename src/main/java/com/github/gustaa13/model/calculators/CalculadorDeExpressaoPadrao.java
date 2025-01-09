@@ -93,7 +93,7 @@ public class CalculadorDeExpressaoPadrao{
     protected void obterNumeroAntecessorAoOperador(String operador){
         obterPosicaoOperador(operador);
 
-        if(posicaoOperador < 0) throw new PosicaoNaoExisteException();
+        if(posicaoOperador - 1 < 0) throw new PosicaoNaoExisteException();
         
         numeroAntecessor = new BigDecimal(expressaoVetorizada.get(posicaoOperador - 1));
     }
@@ -101,7 +101,7 @@ public class CalculadorDeExpressaoPadrao{
     protected void obterNumeroPosteriorAoOperador(String operador){
         obterPosicaoOperador(operador);
 
-        if(posicaoOperador > expressaoVetorizada.size()) throw new PosicaoNaoExisteException();
+        if(posicaoOperador + 1 > expressaoVetorizada.size() - 1) throw new PosicaoNaoExisteException();
 
         numeroPosterior = new BigDecimal(expressaoVetorizada.get(posicaoOperador + 1));
     }
@@ -112,7 +112,8 @@ public class CalculadorDeExpressaoPadrao{
             try {
                 obterNumeroAntecessorAoOperador(operador);
             } catch(PosicaoNaoExisteException e){
-                numeroAntecessor = new BigDecimal(0);
+                expressaoVetorizada.add(posicaoOperador, "0");
+                obterNumeroAntecessorAoOperador(operador);
             }
             
             String valor = Calculadora.porcentagem(numeroAntecessor).toString();
@@ -129,13 +130,15 @@ public class CalculadorDeExpressaoPadrao{
             try {
                 obterNumeroAntecessorAoOperador(operador);
             } catch(PosicaoNaoExisteException e){
-                numeroAntecessor = new BigDecimal(1);
+                expressaoVetorizada.add(posicaoOperador, "1");
+                obterNumeroAntecessorAoOperador(operador);
             }
             
             try {
                 obterNumeroPosteriorAoOperador(operador);
             } catch(PosicaoNaoExisteException e){
-                numeroPosterior = new BigDecimal(1);
+                expressaoVetorizada.add("1");
+                obterNumeroPosteriorAoOperador(operador);
             }
             
             String valor = Calculadora.multiplicacao(numeroAntecessor, numeroPosterior).toString();
@@ -153,13 +156,15 @@ public class CalculadorDeExpressaoPadrao{
             try {
                 obterNumeroAntecessorAoOperador(operador);
             } catch(PosicaoNaoExisteException e){
-                numeroAntecessor = new BigDecimal(0);
+                expressaoVetorizada.add(posicaoOperador, "0");
+                obterNumeroAntecessorAoOperador(operador);
             }
             
             try {
                 obterNumeroPosteriorAoOperador(operador);
             } catch(PosicaoNaoExisteException e){
-                numeroPosterior = new BigDecimal(1);
+                expressaoVetorizada.add("1");
+                obterNumeroPosteriorAoOperador(operador);
             }
 
             String valor;
@@ -183,13 +188,15 @@ public class CalculadorDeExpressaoPadrao{
             try {
                 obterNumeroAntecessorAoOperador(operador);
             } catch(PosicaoNaoExisteException e){
-                numeroAntecessor = new BigDecimal(0);
+                expressaoVetorizada.add(posicaoOperador, "0");
+                obterNumeroAntecessorAoOperador(operador);
             }
 
             try {
                 obterNumeroPosteriorAoOperador(operador);
             } catch(PosicaoNaoExisteException e){
-                numeroPosterior = new BigDecimal(0);
+                expressaoVetorizada.add("0");
+                obterNumeroPosteriorAoOperador(operador);
             }
 
             String valor = Calculadora.soma(numeroAntecessor, numeroPosterior).toString();
@@ -207,13 +214,15 @@ public class CalculadorDeExpressaoPadrao{
             try {
                 obterNumeroAntecessorAoOperador(operador);
             } catch(PosicaoNaoExisteException e){
-                numeroAntecessor = new BigDecimal(0);
+                expressaoVetorizada.add(posicaoOperador, "0");
+                obterNumeroAntecessorAoOperador(operador);
             }
 
             try {
                 obterNumeroPosteriorAoOperador(operador);
             } catch(PosicaoNaoExisteException e){
-                numeroPosterior = new BigDecimal(0);
+                expressaoVetorizada.add("0");
+                obterNumeroPosteriorAoOperador(operador);
             }
 
             String valor = Calculadora.subtracao(numeroAntecessor, numeroPosterior).toString();

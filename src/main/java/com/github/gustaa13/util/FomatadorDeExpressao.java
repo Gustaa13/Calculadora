@@ -19,6 +19,7 @@ public class FomatadorDeExpressao {
         StringBuffer resultado = new StringBuffer();
         while (correspondencia.find()) {
             String numero = correspondencia.group();
+
             try {
                 numero = numero.replace(",", ".");
                 
@@ -40,6 +41,7 @@ public class FomatadorDeExpressao {
             } catch (NumberFormatException e) {
                 correspondencia.appendReplacement(resultado, numero);
             }
+            
         }
         correspondencia.appendTail(resultado);
 

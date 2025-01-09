@@ -4,16 +4,8 @@ import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
 
 public class ExpressoesCientificas extends TratadorDeEntradas {
     
-    public ExpressoesCientificas(
-        
-        StringBuilder expressao
-        
-        ){
-
-        super(
-            expressao
-        );
-
+    public ExpressoesCientificas(StringBuilder expressao){
+        super(expressao);
     }
 
     public void adicionarCaracterNaExpressao(String caractere){
@@ -39,8 +31,9 @@ public class ExpressoesCientificas extends TratadorDeEntradas {
                 return;
             }else if(caractere.equals("0") && !expressaoExiste()){
                 return;
-            }
-            else{
+            }else if(getExpressao().length() > 0 && (getExpressao().charAt(getExpressao().length() - 1) == ')')){
+                return;
+            }else{
                 getExpressao().append(caractere);
                 setContadorDeAlgarismos(getContadorDeAlgarismos() + 1);
             }
