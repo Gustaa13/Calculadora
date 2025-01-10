@@ -1,6 +1,6 @@
 .text-field {
     -fx-text-fill: #333333; 
-    -fx-font-size: 1.9em;
+    -fx-font-size: 2em;
     -fx-background-color: #FFFFFF; 
     -fx-padding: 10px;
     -fx-border-color: transparent; 
@@ -23,12 +23,16 @@
     -fx-background-color: #009284;
 }
 
-.button-igual {
+#igual {
     -fx-background-color: #e94c1d; 
 }
 
-.button-igual:hover {
+#igual:hover {
     -fx-background-color: #ff5521; 
+}
+
+#apagar {
+    -fx-font-size: 1.8em;
 }
 
 .button-operador {

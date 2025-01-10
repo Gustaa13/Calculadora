@@ -39,7 +39,7 @@
             <Button fx:id="nove" layoutX="203.0" layoutY="294.0" mnemonicParsing="false" onAction="#pressionarNove" prefHeight="51.0" prefWidth="92.0" text="9" />
             <Button styleClass="button-operador" fx:id="multiplicacao" layoutX="301.0" layoutY="294.0" mnemonicParsing="false" onAction="#pressionarMultiplicacao" prefHeight="51.0" prefWidth="92.0" text="x" />
             <Button styleClass="button-operador" fx:id="apagarTudo" layoutX="7.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarApagarTudo" prefHeight="51.0" prefWidth="92.0" text="C" />
-            <Button styleClass="button-operador" fx:id="apagar" layoutX="105.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarApagar" prefHeight="51.0" prefWidth="92.0" text="&lt;-" />
+            <Button styleClass="button-operador" fx:id="apagar" layoutX="105.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarApagar" prefHeight="51.0" prefWidth="92.0" text="←" />
             <Button styleClass="button-operador" fx:id="porcentagem" layoutX="203.0" layoutY="237.0" mnemonicParsing="false" onAction="#pressionarPorcentagem" prefHeight="51.0" prefWidth="92.0" text="\%" />
             <Button styleClass="button-operador" fx:id="divisao" layoutX="301.0" layoutY="237.0" mnemonicParsing="false" onAction="#pressionarDivisao" prefHeight="51.0" prefWidth="92.0" text="÷" />
             <TextField fx:id="entrada" alignment="CENTER_RIGHT" editable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="175.0" prefWidth="400.0" styleClass="" text="0">

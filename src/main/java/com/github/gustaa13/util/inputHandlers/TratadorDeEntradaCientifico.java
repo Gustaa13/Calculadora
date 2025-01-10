@@ -8,9 +8,9 @@ public class TratadorDeEntradaCientifico extends TratadorDeEntradaPadrao {
     private Integer contadorDeParentesesFechados;
     
     public TratadorDeEntradaCientifico(StringBuilder expressao){
-        super(expressao, "+-x÷^√", ",(");
+        super(expressao, "+-x÷^√(", ",");
 
-        operadores = "+-x÷^√";
+        operadores = "+-x÷^√(";
         //caracteresespeciais = ",(";
         contadorDeParentesesAbertos = 0;
         contadorDeParentesesFechados = 0;
@@ -83,9 +83,6 @@ public class TratadorDeEntradaCientifico extends TratadorDeEntradaPadrao {
             getExpressao().append(")");
             setContadorDeParentesesFechados(getContadorDeParentesesFechados() + 1);
         }else if(operadores.contains(String.valueOf(getExpressao().charAt(getExpressao().length() - 1)))){
-            getExpressao().append("(");
-            setContadorDeParentesesAbertos(getContadorDeParentesesAbertos() + 1);
-        }else if(getExpressao().charAt(getExpressao().length() - 1) == '('){
             getExpressao().append("(");
             setContadorDeParentesesAbertos(getContadorDeParentesesAbertos() + 1);
         }else if(getExpressao().charAt(getExpressao().length() - 1) == ')' && (getContadorDeParentesesAbertos() > getContadorDeParentesesFechados())){
