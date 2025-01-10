@@ -14,7 +14,7 @@ public class CalculadoraApp extends Application {
 
     @Override
     public void start(Stage palco) throws IOException {
-        cena = new Scene(loadFXML("/com/github/gustaa13/calculadora-padrao"), 400, 545);
+        cena = new Scene(loadFXML("/com/github/gustaa13/calculadora-padrao"), 400, 550);
 
         cena.getStylesheets().add(getClass().getResource("/com/github/gustaa13/style.css").toExternalForm());
 

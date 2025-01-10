@@ -1,26 +1,82 @@
 .text-field {
-    -fx-text-fill: rgb(85, 85, 85);
-    -fx-font-size: 28px;
-    -fx-background-color: white;
-    -fx-padding: 12;
+    -fx-text-fill: #333333; 
+    -fx-font-size: 1.9em;
+    -fx-background-color: #FFFFFF; 
+    -fx-padding: 10px;
+    -fx-border-color: transparent; 
 }
 
 .button {
-    -fx-border-color:rgb(126, 126, 126);
+    -fx-border-color: transparent;
+    -fx-font-size: 1.3em;
+    -fx-text-fill: #ffffff; 
+    -fx-background-color: #00796B; 
+    -fx-background-radius: 10px;
 }
 
-.button:focused {
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
-    -fx-border-color: rgb(109, 109, 109);
+.button:pressed {
+    -fx-scale-x: 0.95; 
+    -fx-scale-y: 0.95; 
+}
+
+.button:hover {
+    -fx-background-color: #009284;
+}
+
+.button-igual {
+    -fx-background-color: #e94c1d; 
+}
+
+.button-igual:hover {
+    -fx-background-color: #ff5521; 
+}
+
+.button-operador {
+    -fx-background-color: #00a592; 
+}
+
+.button-operador:hover {
+    -fx-background-color: #00b49f; 
 }
 
 .text-field:focused {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
-    -fx-border-color: transparent;
-    -fx-cursor: text;
+    -fx-border-color: transparent; 
+    -fx-cursor: text; 
     -fx-highlight-fill: transparent; 
     -fx-highlight-text-fill: -fx-text-fill;
 }
 
+.menu-bar {
+    -fx-background-color: #ECEFF1; 
+}
+
+.vbox {
+    -fx-background-color: #ECEFF1; 
+}
+
+.menu {
+    -fx-background-color: #e94c1d;
+    -fx-background-radius: 50px;
+}
+
+.menu:hover {
+    -fx-background-color: #ff5521;
+}
+
+.menu .label {
+    -fx-text-fill: white; 
+}
+
+.menu-item {
+    -fx-background-color: #00a592; 
+}
+
+.menu-item:hover {
+    -fx-background-color: #00b49f;
+}
+
+.menu-item .label {
+    -fx-text-fill: white; 
+}
