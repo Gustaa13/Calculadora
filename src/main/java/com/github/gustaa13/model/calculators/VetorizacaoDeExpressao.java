@@ -25,10 +25,6 @@ public class VetorizacaoDeExpressao {
 
         if(numero.length() > 0){
             expressaoVetorizada.add(numero.toString());
-        }else{
-            if(expressaoVetorizada.get(expressaoVetorizada.size() - 1).matches("[)]")){
-                return expressaoVetorizada;
-            }
         }
 
         return expressaoVetorizada;

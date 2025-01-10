@@ -10,7 +10,7 @@ public class CalculadorDeExpressaoCientifico extends CalculadorDeExpressaoPadrao
 
     private int posicaoFechamentoDeParenteses;
     private int posicaoAberturaDeParenteses;
-    private List<String> salveExpressaoVetorizada;
+    private List<String> salvoExpressaoVetorizada;
     
     public CalculadorDeExpressaoCientifico(String expressao){
         super(expressao, "+-x÷%()^√a");
@@ -61,16 +61,16 @@ public class CalculadorDeExpressaoCientifico extends CalculadorDeExpressaoPadrao
     }
 
     public void calcularOperacoesEntreParenteses(String parentesesAberto, String parentesesFechado){
-        while(salveExpressaoVetorizada.contains(parentesesFechado)){
+        while(salvoExpressaoVetorizada.contains(parentesesFechado)){
 
-            posicaoFechamentoDeParenteses = salveExpressaoVetorizada.indexOf(parentesesFechado);
-            setExpressaoVetorizada(salveExpressaoVetorizada.subList(0, posicaoFechamentoDeParenteses));
+            posicaoFechamentoDeParenteses = salvoExpressaoVetorizada.indexOf(parentesesFechado);
+            setExpressaoVetorizada(salvoExpressaoVetorizada.subList(0, posicaoFechamentoDeParenteses));
             posicaoAberturaDeParenteses = getExpressaoVetorizada().lastIndexOf(parentesesAberto);
             setExpressaoVetorizada(getExpressaoVetorizada().subList(posicaoAberturaDeParenteses + 1, posicaoFechamentoDeParenteses));
 
             calcularRadiciacao("√");
 
-            calcularRadiciacao("^");
+            calcularExponenciacao("^");
 
             calcularPorcentagens("%");
 
@@ -82,36 +82,38 @@ public class CalculadorDeExpressaoCientifico extends CalculadorDeExpressaoPadrao
 
             calcularSubtracoes("-");
 
-            salveExpressaoVetorizada.remove(posicaoAberturaDeParenteses);
-            salveExpressaoVetorizada.remove(posicaoAberturaDeParenteses + 1);
+            salvoExpressaoVetorizada.remove(posicaoAberturaDeParenteses);
+            salvoExpressaoVetorizada.remove(posicaoAberturaDeParenteses + 1);
+
+            calcularValorAbsoluto();
         }
     }
 
     public void calcularValorAbsoluto(){
-        if(posicaoAberturaDeParenteses > 0 && salveExpressaoVetorizada.get(posicaoAberturaDeParenteses - 1).equals("a")){
-            BigDecimal numero = new BigDecimal(salveExpressaoVetorizada.get(posicaoAberturaDeParenteses));
+        if(posicaoAberturaDeParenteses > 0 && salvoExpressaoVetorizada.get(posicaoAberturaDeParenteses - 1).equals("a")){
+            BigDecimal numero = new BigDecimal(salvoExpressaoVetorizada.get(posicaoAberturaDeParenteses));
 
             String valor = Calculadora.valorAbsoluto(numero).toString();
 
-            salveExpressaoVetorizada.set(posicaoAberturaDeParenteses, valor);
-            salveExpressaoVetorizada.remove(posicaoAberturaDeParenteses - 1);
+            salvoExpressaoVetorizada.set(posicaoAberturaDeParenteses, valor);
+            salvoExpressaoVetorizada.remove(posicaoAberturaDeParenteses - 1);
         }
     }
 
     @Override
     public void calcularResultadoTotal(){
-        salveExpressaoVetorizada = getExpressaoVetorizada();
+        salvoExpressaoVetorizada = getExpressaoVetorizada();
 
         calcularOperacoesEntreParenteses("(", ")");
         calcularValorAbsoluto();
         
-        while(salveExpressaoVetorizada.remove("("));
+        while(salvoExpressaoVetorizada.remove("("));
 
-        setExpressaoVetorizada(salveExpressaoVetorizada);
+        setExpressaoVetorizada(salvoExpressaoVetorizada);
 
         calcularRadiciacao("√");
 
-        calcularRadiciacao("^");
+        calcularExponenciacao("^");
         
         super.calcularResultadoTotal();
     }

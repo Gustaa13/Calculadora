@@ -3,9 +3,8 @@ package com.github.gustaa13.util;
 import com.github.gustaa13.model.calculators.CalculadorDeExpressaoCientifico;
 import com.github.gustaa13.model.calculators.CalculadorDeExpressaoPadrao;
 import com.github.gustaa13.util.exceptions.DivisaoPorZeroException;
-import com.github.gustaa13.util.inputHandlers.ExpressoesCientificas;
-import com.github.gustaa13.util.inputHandlers.ExpressoesPadroes;
-import com.github.gustaa13.util.inputHandlers.TratadorDeEntradas;
+import com.github.gustaa13.util.inputHandlers.TratadorDeEntradaCientifico;
+import com.github.gustaa13.util.inputHandlers.TratadorDeEntradaPadrao;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -19,7 +18,7 @@ public class ControladorDeTeclas {
         entrada.positionCaret(entrada.getLength());
     }
 
-    public static void aplicarTecla(String caracter, TextField entrada, @SuppressWarnings("exports") TratadorDeEntradas expressaoDeEntrada){
+    public static void aplicarTecla(String caracter, TextField entrada, @SuppressWarnings("exports") TratadorDeEntradaPadrao expressaoDeEntrada){
 
         try {
             expressaoDeEntrada.adicionarCaracterNaExpressao(caracter);
@@ -38,7 +37,7 @@ public class ControladorDeTeclas {
         focadorDeTexto(entrada);
     }
 
-    private static void aplicarResultado(TextField entrada, TratadorDeEntradas expressaoDeEntrada, CalculadorDeExpressaoPadrao calculador){
+    private static void aplicarResultado(TextField entrada, TratadorDeEntradaPadrao expressaoDeEntrada, CalculadorDeExpressaoPadrao calculador){
         
         try {
             expressaoDeEntrada.concluirExpressao();
@@ -53,29 +52,29 @@ public class ControladorDeTeclas {
         focadorDeTexto(entrada);
     }
 
-    public static void aplicarTeclaIgual(TextField entrada, @SuppressWarnings("exports") ExpressoesPadroes expressaoDeEntrada){
+    public static void aplicarTeclaIgual(TextField entrada, @SuppressWarnings("exports") TratadorDeEntradaPadrao expressaoDeEntrada){
         if(!expressaoDeEntrada.expressaoExiste()) return;
         CalculadorDeExpressaoPadrao calculador = new CalculadorDeExpressaoPadrao(expressaoDeEntrada.getExpressaoFinal().toString());
 
         aplicarResultado(entrada, expressaoDeEntrada, calculador);
     }
 
-    public static void aplicarTeclaIgual(TextField entrada, @SuppressWarnings("exports") ExpressoesCientificas expressaoDeEntrada){
+    public static void aplicarTeclaIgual(TextField entrada, @SuppressWarnings("exports") TratadorDeEntradaCientifico expressaoDeEntrada){
         if(!expressaoDeEntrada.expressaoExiste()) return;
         CalculadorDeExpressaoCientifico calculador = new CalculadorDeExpressaoCientifico(expressaoDeEntrada.getExpressaoFinal().toString());
 
         aplicarResultado(entrada, expressaoDeEntrada, calculador);
     }
 
-    public static void aplicarTeclaApagar(TextField entrada, @SuppressWarnings("exports") TratadorDeEntradas expressaoDeEntrada){
-        expressaoDeEntrada.apagarCaractereDaExpresssao();
+    public static void aplicarTeclaApagar(TextField entrada, @SuppressWarnings("exports") TratadorDeEntradaPadrao expressaoDeEntrada){
+        expressaoDeEntrada.apagarCaractereDaExpressao();
         entrada.setText(expressaoDeEntrada.getExpressao().length() > 0 ? FomatadorDeExpressao.formatar(expressaoDeEntrada.getExpressao().toString()) : "0");     
 
         focadorDeTexto(entrada);
     }
 
-    public static void aplicarTeclaApagarTudo(TextField entrada, @SuppressWarnings("exports") TratadorDeEntradas expressaoDeEntrada){
-        expressaoDeEntrada.apagarExpressao();
+    public static void aplicarTeclaApagarTudo(TextField entrada, @SuppressWarnings("exports") TratadorDeEntradaPadrao expressaoDeEntrada){
+        expressaoDeEntrada.apagarExpressao();;
         entrada.setText("0");
         
         focadorDeTexto(entrada);
@@ -85,21 +84,21 @@ public class ControladorDeTeclas {
         adicionarEventoAoPressionar(botao, codigo_tecla, false);
     }
 
-    public static void adicionarEventoAoPressionar(Button botao, KeyCode codigo_tecla, boolean shiftativado){
-        botao.getScene().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode() == codigo_tecla) {
-                if (shiftativado && event.isShiftDown()) {
+    public static void adicionarEventoAoPressionar(Button botao, KeyCode codigoTecla, boolean shiftativado){
+        botao.getScene().addEventFilter(KeyEvent.KEY_PRESSED, evento -> {
+            if (evento.getCode() == codigoTecla) {
+                if (shiftativado && evento.isShiftDown()) {
                     botao.arm();
                     botao.fire();
-                }else if(!shiftativado && !event.isShiftDown()){
+                }else if(!shiftativado && !evento.isShiftDown()){
                     botao.arm();
                     botao.fire();
                 }
             }
         });
 
-        botao.getScene().addEventFilter(KeyEvent.KEY_RELEASED, event -> {
-            if (event.getCode() == codigo_tecla) {
+        botao.getScene().addEventFilter(KeyEvent.KEY_RELEASED, evento -> {
+            if (evento.getCode() == codigoTecla) {
                 botao.disarm();
             }
         });

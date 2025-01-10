@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import com.github.gustaa13.application.CalculadoraApp;
 import com.github.gustaa13.util.ControladorDeTeclas;
-import com.github.gustaa13.util.inputHandlers.ExpressoesCientificas;
+import com.github.gustaa13.util.inputHandlers.TratadorDeEntradaCientifico;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -89,126 +89,126 @@ public class ControladorInterfaceCientifico {
     @FXML
     private Button zero;
 
-    ExpressoesCientificas expressaoCientifica;
+    TratadorDeEntradaCientifico entradaCientifica;
 
     @FXML
     void pressionarApagar(){
-        ControladorDeTeclas.aplicarTeclaApagar(entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTeclaApagar(entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarApagarTudo(){
-        ControladorDeTeclas.aplicarTeclaApagarTudo(entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTeclaApagarTudo(entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarCinco(){
-        ControladorDeTeclas.aplicarTecla(cinco.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(cinco.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarDivisao(){
-        ControladorDeTeclas.aplicarTecla(divisao.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(divisao.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarDois(){
-        ControladorDeTeclas.aplicarTecla(dois.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(dois.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarExponenciacao(){
-        ControladorDeTeclas.aplicarTecla(exponenciacao.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(exponenciacao.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarIgual(){
-        ControladorDeTeclas.aplicarTeclaIgual(entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTeclaIgual(entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarMaisOUmenos(){
-        ControladorDeTeclas.aplicarTecla(maisOUmenos.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(maisOUmenos.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarValorAbsoluto(){
-        ControladorDeTeclas.aplicarTecla(valorAbsoluto.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(valorAbsoluto.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarMultiplicacao(){
-        ControladorDeTeclas.aplicarTecla(multiplicacao.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(multiplicacao.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarNove(){
-        ControladorDeTeclas.aplicarTecla(nove.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(nove.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarOito(){
-        ControladorDeTeclas.aplicarTecla(oito.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(oito.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarParenteses(){
-        ControladorDeTeclas.aplicarTecla(parenteses.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(parenteses.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarPorcentagem(){
-        ControladorDeTeclas.aplicarTecla(porcentagem.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(porcentagem.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarQuatro(){
-        ControladorDeTeclas.aplicarTecla(quatro.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(quatro.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarRadiciacao(){
-        ControladorDeTeclas.aplicarTecla(radiciacao.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(radiciacao.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarSeis(){
-        ControladorDeTeclas.aplicarTecla(seis.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(seis.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarSete(){
-        ControladorDeTeclas.aplicarTecla(sete.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(sete.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarSoma(){
-        ControladorDeTeclas.aplicarTecla(soma.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(soma.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarSubtracao(){
-        ControladorDeTeclas.aplicarTecla(subtracao.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(subtracao.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarTres(){
-        ControladorDeTeclas.aplicarTecla(tres.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(tres.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarUm(){
-        ControladorDeTeclas.aplicarTecla(um.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(um.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarVirgula(){
-        ControladorDeTeclas.aplicarTecla(virgula.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(virgula.getText(), entrada, entradaCientifica);
     }
 
     @FXML
     void pressionarZero(){
-        ControladorDeTeclas.aplicarTecla(zero.getText(), entrada, expressaoCientifica);
+        ControladorDeTeclas.aplicarTecla(zero.getText(), entrada, entradaCientifica);
     }
 
     @FXML
@@ -218,7 +218,7 @@ public class ControladorInterfaceCientifico {
 
     @FXML
     public void initialize(){
-        expressaoCientifica = new ExpressoesCientificas(new StringBuilder());
+        entradaCientifica = new TratadorDeEntradaCientifico(new StringBuilder());
 
         Platform.runLater(() -> {
             entrada.getParent().requestFocus();
