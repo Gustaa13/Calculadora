@@ -16,6 +16,18 @@ public class CalculadorDeExpressaoCientifico extends CalculadorDeExpressaoPadrao
         super(expressao, "+-x÷%()^√a");
     }
 
+    protected void obterPosicaoFechamentoDeParenteses(){
+        posicaoFechamentoDeParenteses = salvoExpressaoVetorizada.indexOf(")");
+    }
+
+    protected void obterPosicaoAberturaDeParenteses(){
+        posicaoAberturaDeParenteses = getExpressaoVetorizada().lastIndexOf("(");
+    }
+
+    protected void obterPosicaoAberturaDeParenteses(List<String> expressaoVetorizada){
+        posicaoAberturaDeParenteses = expressaoVetorizada.lastIndexOf("(");
+    }
+
     public void calcularRadiciacao(String operador){
         while(getExpressaoVetorizada().contains(operador)){
             
@@ -63,9 +75,9 @@ public class CalculadorDeExpressaoCientifico extends CalculadorDeExpressaoPadrao
     public void calcularOperacoesEntreParenteses(String parentesesAberto, String parentesesFechado){
         while(salvoExpressaoVetorizada.contains(parentesesFechado)){
 
-            posicaoFechamentoDeParenteses = salvoExpressaoVetorizada.indexOf(parentesesFechado);
+            obterPosicaoFechamentoDeParenteses();
             setExpressaoVetorizada(salvoExpressaoVetorizada.subList(0, posicaoFechamentoDeParenteses));
-            posicaoAberturaDeParenteses = getExpressaoVetorizada().lastIndexOf(parentesesAberto);
+            obterPosicaoAberturaDeParenteses();
             setExpressaoVetorizada(getExpressaoVetorizada().subList(posicaoAberturaDeParenteses + 1, posicaoFechamentoDeParenteses));
 
             calcularRadiciacao("√");
@@ -103,12 +115,15 @@ public class CalculadorDeExpressaoCientifico extends CalculadorDeExpressaoPadrao
     @Override
     public void calcularResultadoTotal(){
         salvoExpressaoVetorizada = getExpressaoVetorizada();
-
-        calcularOperacoesEntreParenteses("(", ")");
-        calcularValorAbsoluto();
         
+        calcularOperacoesEntreParenteses("(", ")");
+
+        obterPosicaoAberturaDeParenteses(salvoExpressaoVetorizada);
+
         while(salvoExpressaoVetorizada.remove("("));
 
+        calcularValorAbsoluto();
+        
         setExpressaoVetorizada(salvoExpressaoVetorizada);
 
         calcularRadiciacao("√");
