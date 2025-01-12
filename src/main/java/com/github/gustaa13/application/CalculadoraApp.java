@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +19,9 @@ public class CalculadoraApp extends Application {
 
         cena.getStylesheets().add(getClass().getResource("/com/github/gustaa13/style.css").toExternalForm());
 
+        Image icone = new Image(getClass().getResource("/image/calculadora.png").toExternalForm());
+
+        palco.getIcons().add(icone);
         palco.setResizable(false);
         palco.setTitle("Calculadora");
         palco.setScene(cena);
