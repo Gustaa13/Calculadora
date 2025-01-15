@@ -156,8 +156,6 @@ public class TratadorDeEntradaPadrao{
         getExpressao().deleteCharAt(getExpressao().length() - 1);
         if(getPermitirVirgula()) setContadorDeAlgarismos(getExpressao().length() - posicaoDoUltimoNumero());
         else setContadorDeAlgarismos(getExpressao().length() - (posicaoDoUltimoNumero() + 1));
-        System.out.println(posicaoDoUltimoNumero() + "\n");
-        System.out.println(contadorDeAlgarismos);
     }
 
     public void tratadorDeOperadorPadrao(String caractere){

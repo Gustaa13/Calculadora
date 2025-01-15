@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox styleClass="vbox" alignment="CENTER" maxHeight="545.0" maxWidth="400.0" minHeight="545.0" minWidth="400.0" prefHeight="545.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.gustaa13.controller.ControladorInterfaceCientifico">
+<VBox alignment="CENTER" maxHeight="545.0" maxWidth="400.0" minHeight="545.0" minWidth="400.0" prefHeight="545.0" prefWidth="400.0" styleClass="vbox" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.gustaa13.controller.ControladorInterfaceCientifico">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -23,25 +23,25 @@
     </MenuBar>
     <AnchorPane prefHeight="520.0" prefWidth="400.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="zero" layoutX="105.0" layoutY="465.0" mnemonicParsing="false" onAction="#pressionarZero" prefHeight="51.0" prefWidth="92.0" text="0" />
-            <Button fx:id="virgula" layoutX="203.0" layoutY="465.0" mnemonicParsing="false" onAction="#pressionarVirgula" prefHeight="51.0" prefWidth="92.0" text="," />
-            <Button styleClass="button-igual" fx:id="igual" layoutX="301.0" layoutY="465.0" mnemonicParsing="false" onAction="#pressionarIgual" prefHeight="51.0" prefWidth="92.0" text="=" />
-            <Button fx:id="um" layoutX="7.0" layoutY="408.0" mnemonicParsing="false" onAction="#pressionarUm" prefHeight="51.0" prefWidth="92.0" text="1" />
-            <Button fx:id="dois" layoutX="105.0" layoutY="408.0" mnemonicParsing="false" onAction="#pressionarDois" prefHeight="51.0" prefWidth="92.0" text="2" />
-            <Button fx:id="tres" layoutX="203.0" layoutY="408.0" mnemonicParsing="false" onAction="#pressionarTres" prefHeight="51.0" prefWidth="92.0" text="3" />
-            <Button styleClass="button-operador" fx:id="soma" layoutX="301.0" layoutY="408.0" mnemonicParsing="false" onAction="#pressionarSoma" prefHeight="51.0" prefWidth="92.0" text="+" />
-            <Button fx:id="quatro" layoutX="7.0" layoutY="351.0" mnemonicParsing="false" onAction="#pressionarQuatro" prefHeight="51.0" prefWidth="92.0" text="4" />
-            <Button fx:id="cinco" layoutX="105.0" layoutY="351.0" mnemonicParsing="false" onAction="#pressionarCinco" prefHeight="51.0" prefWidth="92.0" text="5" />
-            <Button fx:id="seis" layoutX="203.0" layoutY="351.0" mnemonicParsing="false" onAction="#pressionarSeis" prefHeight="51.0" prefWidth="92.0" text="6" />
-            <Button styleClass="button-operador" fx:id="subtracao" layoutX="301.0" layoutY="351.0" mnemonicParsing="false" onAction="#pressionarSubtracao" prefHeight="51.0" prefWidth="92.0" text="-" />
-            <Button fx:id="sete" layoutX="7.0" layoutY="294.0" mnemonicParsing="false" onAction="#pressionarSete" prefHeight="51.0" prefWidth="92.0" text="7" />
-            <Button fx:id="oito" layoutX="105.0" layoutY="294.0" mnemonicParsing="false" onAction="#pressionarOito" prefHeight="51.0" prefWidth="92.0" text="8" />
-            <Button fx:id="nove" layoutX="203.0" layoutY="294.0" mnemonicParsing="false" onAction="#pressionarNove" prefHeight="51.0" prefWidth="92.0" text="9" />
-            <Button styleClass="button-operador" fx:id="multiplicacao" layoutX="301.0" layoutY="294.0" mnemonicParsing="false" onAction="#pressionarMultiplicacao" prefHeight="51.0" prefWidth="92.0" text="x" />
-            <Button styleClass="button-operador" fx:id="apagarTudo" layoutX="7.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarApagarTudo" prefHeight="51.0" prefWidth="92.0" text="C" />
-            <Button styleClass="button-operador" fx:id="apagar" layoutX="105.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarApagar" prefHeight="51.0" prefWidth="92.0" text="←" />
-            <Button styleClass="button-operador" fx:id="porcentagem" layoutX="203.0" layoutY="237.0" mnemonicParsing="false" onAction="#pressionarPorcentagem" prefHeight="51.0" prefWidth="92.0" text="\%" />
-            <Button styleClass="button-operador" fx:id="divisao" layoutX="301.0" layoutY="237.0" mnemonicParsing="false" onAction="#pressionarDivisao" prefHeight="51.0" prefWidth="92.0" text="÷" />
+            <Button fx:id="zero" focusTraversable="false" layoutX="105.0" layoutY="465.0" mnemonicParsing="false" onAction="#pressionarZero" prefHeight="51.0" prefWidth="92.0" text="0" />
+            <Button fx:id="virgula" focusTraversable="false" layoutX="203.0" layoutY="465.0" mnemonicParsing="false" onAction="#pressionarVirgula" prefHeight="51.0" prefWidth="92.0" text="," />
+            <Button fx:id="igual" focusTraversable="false" layoutX="301.0" layoutY="465.0" mnemonicParsing="false" onAction="#pressionarIgual" prefHeight="51.0" prefWidth="92.0" styleClass="button-igual" text="=" />
+            <Button fx:id="um" focusTraversable="false" layoutX="7.0" layoutY="408.0" mnemonicParsing="false" onAction="#pressionarUm" prefHeight="51.0" prefWidth="92.0" text="1" />
+            <Button fx:id="dois" focusTraversable="false" layoutX="105.0" layoutY="408.0" mnemonicParsing="false" onAction="#pressionarDois" prefHeight="51.0" prefWidth="92.0" text="2" />
+            <Button fx:id="tres" focusTraversable="false" layoutX="203.0" layoutY="408.0" mnemonicParsing="false" onAction="#pressionarTres" prefHeight="51.0" prefWidth="92.0" text="3" />
+            <Button fx:id="soma" focusTraversable="false" layoutX="301.0" layoutY="408.0" mnemonicParsing="false" onAction="#pressionarSoma" prefHeight="51.0" prefWidth="92.0" styleClass="button-operador" text="+" />
+            <Button fx:id="quatro" focusTraversable="false" layoutX="7.0" layoutY="351.0" mnemonicParsing="false" onAction="#pressionarQuatro" prefHeight="51.0" prefWidth="92.0" text="4" />
+            <Button fx:id="cinco" focusTraversable="false" layoutX="105.0" layoutY="351.0" mnemonicParsing="false" onAction="#pressionarCinco" prefHeight="51.0" prefWidth="92.0" text="5" />
+            <Button fx:id="seis" focusTraversable="false" layoutX="203.0" layoutY="351.0" mnemonicParsing="false" onAction="#pressionarSeis" prefHeight="51.0" prefWidth="92.0" text="6" />
+            <Button fx:id="subtracao" focusTraversable="false" layoutX="301.0" layoutY="351.0" mnemonicParsing="false" onAction="#pressionarSubtracao" prefHeight="51.0" prefWidth="92.0" styleClass="button-operador" text="-" />
+            <Button fx:id="sete" focusTraversable="false" layoutX="7.0" layoutY="294.0" mnemonicParsing="false" onAction="#pressionarSete" prefHeight="51.0" prefWidth="92.0" text="7" />
+            <Button fx:id="oito" focusTraversable="false" layoutX="105.0" layoutY="294.0" mnemonicParsing="false" onAction="#pressionarOito" prefHeight="51.0" prefWidth="92.0" text="8" />
+            <Button fx:id="nove" focusTraversable="false" layoutX="203.0" layoutY="294.0" mnemonicParsing="false" onAction="#pressionarNove" prefHeight="51.0" prefWidth="92.0" text="9" />
+            <Button fx:id="multiplicacao" focusTraversable="false" layoutX="301.0" layoutY="294.0" mnemonicParsing="false" onAction="#pressionarMultiplicacao" prefHeight="51.0" prefWidth="92.0" styleClass="button-operador" text="x" />
+            <Button fx:id="apagarTudo" focusTraversable="false" layoutX="7.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarApagarTudo" prefHeight="51.0" prefWidth="92.0" styleClass="button-operador" text="C" />
+            <Button fx:id="apagar" focusTraversable="false" layoutX="105.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarApagar" prefHeight="51.0" prefWidth="92.0" styleClass="button-operador" text="←" />
+            <Button fx:id="porcentagem" focusTraversable="false" layoutX="203.0" layoutY="237.0" mnemonicParsing="false" onAction="#pressionarPorcentagem" prefHeight="51.0" prefWidth="92.0" styleClass="button-operador" text="\%" />
+            <Button fx:id="divisao" focusTraversable="false" layoutX="301.0" layoutY="237.0" mnemonicParsing="false" onAction="#pressionarDivisao" prefHeight="51.0" prefWidth="92.0" styleClass="button-operador" text="÷" />
             <TextField fx:id="entrada" alignment="CENTER_RIGHT" editable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="175.0" prefWidth="400.0" styleClass="" text="0">
                <font>
                   <Font size="30.0" />
@@ -50,11 +50,11 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </TextField>
-            <Button styleClass="button-operador" fx:id="maisOUmenos" layoutX="7.0" layoutY="465.0" mnemonicParsing="false" onAction="#pressionarMaisOUmenos" prefHeight="51.0" prefWidth="92.0" text="+/-" />
-            <Button styleClass="button-operador" fx:id="exponenciacao" layoutX="105.0" layoutY="237.0" mnemonicParsing="false" onAction="#pressionarExponenciacao" prefHeight="51.0" prefWidth="92.0" text="xʸ" />
-            <Button styleClass="button-operador" fx:id="radiciacao" layoutX="7.0" layoutY="237.0" mnemonicParsing="false" onAction="#pressionarRadiciacao" prefHeight="51.0" prefWidth="92.0" text="√" />
-            <Button styleClass="button-operador" fx:id="parenteses" layoutX="203.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarParenteses" prefHeight="51.0" prefWidth="92.0" text="( )" />
-            <Button styleClass="button-operador" fx:id="valorAbsoluto" layoutX="301.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarValorAbsoluto" prefHeight="51.0" prefWidth="92.0" text="|x|" />
+            <Button fx:id="maisOUmenos" focusTraversable="false" layoutX="7.0" layoutY="465.0" mnemonicParsing="false" onAction="#pressionarMaisOUmenos" prefHeight="51.0" prefWidth="92.0" styleClass="button-operador" text="+/-" />
+            <Button fx:id="exponenciacao" focusTraversable="false" layoutX="105.0" layoutY="237.0" mnemonicParsing="false" onAction="#pressionarExponenciacao" prefHeight="51.0" prefWidth="92.0" styleClass="button-operador" text="xʸ" />
+            <Button fx:id="radiciacao" focusTraversable="false" layoutX="7.0" layoutY="237.0" mnemonicParsing="false" onAction="#pressionarRadiciacao" prefHeight="51.0" prefWidth="92.0" styleClass="button-operador" text="√" />
+            <Button fx:id="parenteses" focusTraversable="false" layoutX="203.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarParenteses" prefHeight="51.0" prefWidth="92.0" styleClass="button-operador" text="( )" />
+            <Button fx:id="valorAbsoluto" focusTraversable="false" layoutX="301.0" layoutY="180.0" mnemonicParsing="false" onAction="#pressionarValorAbsoluto" prefHeight="51.0" prefWidth="92.0" styleClass="button-operador" text="|x|" />
          </children>
     </AnchorPane>
   </children>
