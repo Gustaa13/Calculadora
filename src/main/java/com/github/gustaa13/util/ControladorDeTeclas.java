@@ -67,7 +67,7 @@ public class ControladorDeTeclas {
     }
 
     public static void aplicarTeclaApagar(TextField entrada, @SuppressWarnings("exports") TratadorDeEntradaPadrao expressaoDeEntrada){
-        expressaoDeEntrada.apagarCaractereDaExpressao();
+        expressaoDeEntrada.apagarCaracterDaExpressao();
         entrada.setText(expressaoDeEntrada.getExpressao().length() > 0 ? FomatadorDeExpressao.formatar(expressaoDeEntrada.getExpressao().toString()) : "0");     
 
         focadorDeTexto(entrada);

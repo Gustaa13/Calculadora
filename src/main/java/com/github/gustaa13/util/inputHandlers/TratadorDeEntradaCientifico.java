@@ -64,7 +64,7 @@ public class TratadorDeEntradaCientifico extends TratadorDeEntradaPadrao {
     }
 
     @Override
-    public void apagarCaractereDaExpressao(){
+    public void apagarCaracterDaExpressao(){
         if(getExpressao().length() <= 0) return;
         if(getExpressao().charAt(getExpressao().length() - 1) == '('){
             contadorDeParentesesAbertos--;
@@ -72,7 +72,7 @@ public class TratadorDeEntradaCientifico extends TratadorDeEntradaPadrao {
                 getExpressao().delete(getExpressao().length() - 4, getExpressao().length() - 1);
             }
         } 
-        super.apagarCaractereDaExpressao();
+        super.apagarCaracterDaExpressao();
     }
 
     protected void tratadorDeParenteses(String caractere){

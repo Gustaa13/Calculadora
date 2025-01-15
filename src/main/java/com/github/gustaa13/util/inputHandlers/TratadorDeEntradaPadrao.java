@@ -158,7 +158,7 @@ public class TratadorDeEntradaPadrao{
         return index;
     }
 
-    public void apagarCaractereDaExpressao(){
+    public void apagarCaracterDaExpressao(){
         if(getExpressao().length() <= 0) return; 
         if(Character.isDigit(getExpressao().charAt(getExpressao().length() - 1)) && getContadorDeAlgarismos() > 0) setContadorDeAlgarismos(getExpressao().length() - 1 - posicaoDoUltimoNumero());
         if(getExpressao().charAt(getExpressao().length() - 1) == ',') setPermitirVirgula(true);
