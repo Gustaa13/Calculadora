@@ -7,14 +7,12 @@ public class TratadorDeEntradaPadrao{
     private String operadores;
     private String caracteresespeciais;
     private Integer contadorDeAlgarismos;
-    private boolean permitirVirgula; 
     private boolean permitirPorcentagem;
     private StringBuilder expressao;
 
     protected TratadorDeEntradaPadrao(StringBuilder expressao, String operadores, String caracteresespeciais){
         contadorDeAlgarismos = 0;
         permitirPorcentagem = true;
-        permitirVirgula = true;
 
         this.expressao = expressao;
         this.operadores = operadores;
@@ -24,7 +22,6 @@ public class TratadorDeEntradaPadrao{
     public TratadorDeEntradaPadrao(StringBuilder expressao){
         contadorDeAlgarismos = 0;
         permitirPorcentagem = true;
-        permitirVirgula = true;
 
         this.expressao = expressao;
         operadores = "+-x÷";
@@ -41,11 +38,10 @@ public class TratadorDeEntradaPadrao{
     }
 
     protected boolean getPermitirVirgula() {
-        return permitirVirgula;
-    }
-
-    protected void setPermitirVirgula(boolean permitirVirgula) {
-        this.permitirVirgula = permitirVirgula;
+        for(int i = getExpressao().length() - 1; i > posicaoDoUltimoNumero(); i--){
+            if(getExpressao().charAt(i) == ',') return false;
+        }
+        return true;
     }
 
     protected boolean getPermitirPorcentagem() {
@@ -75,7 +71,6 @@ public class TratadorDeEntradaPadrao{
 
     public void apagarExpressao(){
         contadorDeAlgarismos = 0;
-        permitirVirgula = true;
         permitirPorcentagem = true;
         expressao.setLength(0);
     }
@@ -83,18 +78,15 @@ public class TratadorDeEntradaPadrao{
     protected void tratadorDeVirgula(String caractere){
         if(getPermitirVirgula() && getContadorDeAlgarismos() == 0){
             getExpressao().append("0" + caractere);
-            setPermitirVirgula(false);
             setContadorDeAlgarismos(getContadorDeAlgarismos() + 1);
         }else if(getPermitirVirgula() && getContadorDeAlgarismos() < 15){
             getExpressao().append(caractere);
-            setPermitirVirgula(false);
         }
     }
 
     protected void tratadorDeOperadorPorcentagem(String caractere){
-        if(getExpressao().length() > 0 && getPermitirPorcentagem() && getContadorDeAlgarismos() > 0){
+        if(getExpressao().length() > 0 && getPermitirPorcentagem() && getContadorDeAlgarismos() > 0 && !(getExpressao().charAt(getExpressao().length() - 1) == '%')){
             getExpressao().append(caractere);
-            setPermitirVirgula(true);
             setContadorDeAlgarismos(0);
             setPermitirPorcentagem(false);
         }
@@ -136,7 +128,6 @@ public class TratadorDeEntradaPadrao{
         if(getExpressao().length() > 0 && (getExpressao().charAt(getExpressao().length() - 1) == '%')){
             getExpressao().append("x" + caractere);
             setPermitirPorcentagem(true);
-            setPermitirVirgula(true);
             setContadorDeAlgarismos(getContadorDeAlgarismos() + 1);
         }else{
             getExpressao().append(caractere);
@@ -147,7 +138,7 @@ public class TratadorDeEntradaPadrao{
 
     protected int posicaoDoUltimoNumero(){
         int index = 0;
-
+        
         for(int i = getExpressao().length() - 1; i >= 0; i--){
             if(operadores.contains(String.valueOf(getExpressao().charAt(i)))){
                 index = i + 1;
@@ -160,11 +151,13 @@ public class TratadorDeEntradaPadrao{
 
     public void apagarCaracterDaExpressao(){
         if(getExpressao().length() <= 0) return; 
-        if(Character.isDigit(getExpressao().charAt(getExpressao().length() - 1)) && getContadorDeAlgarismos() > 0) setContadorDeAlgarismos(getExpressao().length() - 1 - posicaoDoUltimoNumero());
-        if(getExpressao().charAt(getExpressao().length() - 1) == ',') setPermitirVirgula(true);
         if(getExpressao().charAt(getExpressao().length() - 1) == '%') setPermitirPorcentagem(true);
 
         getExpressao().deleteCharAt(getExpressao().length() - 1);
+        if(getPermitirVirgula()) setContadorDeAlgarismos(getExpressao().length() - posicaoDoUltimoNumero());
+        else setContadorDeAlgarismos(getExpressao().length() - (posicaoDoUltimoNumero() + 1));
+        System.out.println(posicaoDoUltimoNumero() + "\n");
+        System.out.println(contadorDeAlgarismos);
     }
 
     public void tratadorDeOperadorPadrao(String caractere){
@@ -177,7 +170,6 @@ public class TratadorDeEntradaPadrao{
         }
 
         getExpressao().append(caractere);
-        setPermitirVirgula(true);
         setContadorDeAlgarismos(0);
         setPermitirPorcentagem(true);
     }

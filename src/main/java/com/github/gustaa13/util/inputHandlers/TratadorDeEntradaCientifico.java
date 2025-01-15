@@ -118,7 +118,6 @@ public class TratadorDeEntradaCientifico extends TratadorDeEntradaPadrao {
     protected void tratadorDeExponenciacao(){
         if(getContadorDeAlgarismos() <= 0) return;
         getExpressao().append("^");
-        setPermitirVirgula(true);
         setContadorDeAlgarismos(0);
     }
 
