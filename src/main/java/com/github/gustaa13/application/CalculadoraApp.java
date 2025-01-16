@@ -17,7 +17,7 @@ public class CalculadoraApp extends Application {
     public void start(Stage palco) throws IOException {
         cena = new Scene(loadFXML("/com/github/gustaa13/calculadora-padrao"), 400, 550);
 
-        cena.getStylesheets().add(getClass().getResource("/com/github/gustaa13/style.css").toExternalForm());
+        cena.getStylesheets().add(getClass().getResource("/com/github/gustaa13/estilo.css").toExternalForm());
 
         Image icone = new Image(getClass().getResource("/image/calculadora.png").toExternalForm());
 
