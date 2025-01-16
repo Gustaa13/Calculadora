@@ -63,6 +63,7 @@ Calculadora/
 └── README.md
 ```
 
+- `Calculadora.exe`: Executável Windows (É necessário ter o JDK versão 17 ou mais configurado na varíavel de ambiente %JAVA_HOME%).
 - `CalculadoraApp.java`: Classe principal que inicializa a aplicação.
 - `Main.java`: Classe de suporte para configuração inicial.
 - `ControladorInterfaceCientifico.java` e `ControladorInterfacePadrao.java`: Controladores para as interfaces gráficas científica e padrão.
@@ -102,7 +103,7 @@ Calculadora/
 
 ![ícone da Calculadora](src/main/resources/image/calculadora.png) 
 
-Pixel art por Diego Nascimento.
+Por Diego Nascimento.
 
 ## Telas
 
