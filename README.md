@@ -21,6 +21,8 @@ O projeto é estruturado da seguinte forma:
 
 ```
 Calculadora/
+├── exe/
+│   └── Calculadora.exe
 ├── src/
 │   ├── main/
 │   │   ├── java/
