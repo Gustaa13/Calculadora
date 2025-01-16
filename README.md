@@ -53,7 +53,9 @@ Calculadora/
 │   │           ├── calculadora-padrao.fxml
 │   │           └── estilo.css
 │   │       └── image
-│   │           └── calculadora.png
+│   │           ├── calculadora.png
+│   │           ├── tela-cientifica.fxml
+│   │           └── tela-padrao.css
 ├── .gitignore
 ├── pom.xml
 └── README.md
@@ -94,11 +96,15 @@ Calculadora/
    mvn javafx:run
    ```
 
-## ícone da Calculadora
+## ícone
 
-![Interface da Calculadora](src/main/resources/image/calculadora.png)
+![ícone da Calculadora](src/main/resources/image/calculadora.png) 
 
-Pixelart feita por Diego Nascimento.
+Pixel art por Diego Nascimento.
+
+## Telas
+
+![Interface da Calculadora Padrão](src/main/resources/image/tela-padrao.png) ![Interface da Calculadora Científica](src/main/resources/image/tela-cientifica.png) 
 
 ---
 
